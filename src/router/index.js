@@ -6,8 +6,14 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Main
+      component: Main,
+      children: [
+        {
+          path: '',
+          name: 'home',
+          component: () => import('@/views/IndexView.vue')
+        }
+      ]
     }
   ]
 })
