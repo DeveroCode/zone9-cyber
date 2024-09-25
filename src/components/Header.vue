@@ -27,7 +27,7 @@ const hancliClickMenu = () => {
         </nav>
 
         <!-- Botones a la derecha -->
-        <div class="hidden md:blockml-auto space-x-5">
+        <div class="hidden md:block ml-auto space-x-5">
             <button class="text-white py-2 px-10 rounded-full bg-secondary">Iniciar</button>
             <button class="text-secondary py-2 px-10 rounded-full bg-primary">Reserva</button>
         </div>
