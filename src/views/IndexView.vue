@@ -1,15 +1,26 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import background from '/img/background.jpg'
 import working from '/img/working.svg'
 import wifi from '/img/logo-wifi.svg'
 import Services from '@/components/Services.vue'
 import ContactUs from '@/components/Contact-us.vue'
 import Location from '@/components/Location.vue'
+import Parallax from 'parallax-js'
 import { CheckIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline';
+
+const parallaxElement = ref(null)
+
+onMounted(() => {
+    const scene = document.querySelector('.parallax')
+    if (scene) {
+        new Parallax(scene)
+    }
+});
 </script>
 
 <template>
-    <section class="bg-secondary py-10 h-screen flex flex-col md:flex-row justify-center items-center px-4 md:px-32">
+    <section class="bg-secondary py-10 h-screen flex flex-col md:flex-row justify-center items-center px-4 md:px-32 ">
         <div class="text-white text-center md:text-left">
             <h1 class="text-4xl md:text-7xl 2xl:text-8xl w-full md:w-2/3 font-bold animate-fadeInUp">
                 Bienvenido a Zona9.com
@@ -24,9 +35,11 @@ import { CheckIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline';
             </button>
         </div>
 
-        <img :src="wifi"
-            alt="Persona trabajando en su laptop, sentada sobre un router rodeada de iconos de mensajes, emails y aplicaciones de chat como WhatsApp"
-            class="hidden md:block md:w-[42%] mt-8 md:mt-0" loading="lazy">
+        <div class="md:parallax md:w-[42%]">
+            <img :src="wifi" ref="parallaxElement" data-depth="1.0"
+                alt="Persona trabajando en su laptop, sentada sobre un router rodeada de iconos de mensajes, emails y aplicaciones de chat como WhatsApp"
+                class="hidden md:block mt-8 md:mt-0" loading="lazy">
+        </div>
     </section>
 
 
@@ -43,43 +56,27 @@ import { CheckIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline';
         <img :src="wifi" alt="WiFi Logo" class="w-[42%] relative z-10">
     </section> -->
 
-    <main class="p-6 mt-10 md:mt-0 md:p-24 h-auto md:h-screen flex flex-col justify-center">
+    <main class="main-section p-6 mt-10 md:mt-0 md:p-24 h-auto md:h-screen flex flex-col justify-center relative">
         <h2
             class="text-2xl w-full 2xl:text-7xl md:text-5xl md:w-2/3 font-bold capitalize text-secondary animate-fadeInUp">
-            creemos
-            que cada
-            experiencia debe
-            ser
-            eficiente
-            y agradable.</h2>
-
-
+            creemos que cada experiencia debe ser eficiente y agradable.
+        </h2>
         <div class="mt-10">
-            <p class="text-lg 2xl:text-xl text-secondary md:w-1/2">Fundada en 2018, Zona9 ah brindado un servicio de
-                alta
-                calidad
-                a la
-                comunidad
-                de Ascencion, chihuahua.
+            <p class="text-lg 2xl:text-xl text-secondary md:w-1/2">
+                Fundada en 2018, Zona9 ha brindado un servicio de alta calidad a la comunidad de Ascension, Chihuahua.
                 Nuestro principal objetivo es proporcionar una experiencia satisfactoria y segura a todos nuestros
                 clientes.
             </p>
-
             <section>
-                <span class="text-lg mt-10 block 2xl:text-xl text-secondary md:w-1/2">Sea cual sea el
-                    servicio de su
-                    elección, nos
-                    aseguraremos
-                    de que esté libre de
-                    riesgos y
-                    sea
-                    entretenido
-                    en todo momento.</span>
-
+                <span class="text-lg mt-10 block 2xl:text-xl text-secondary md:w-1/2">
+                    Sea cual sea el servicio de su elección, nos aseguraremos de que esté libre de riesgos y sea
+                    entretenido en todo momento.
+                </span>
                 <Services />
             </section>
         </div>
     </main>
+
 
     <!-- <section class="bg-secondary h-screen p-24 mb-32 flex flex-col justify-center">
         <h2 class="2xl:text-8xl md:text-5xl w-2/3 font-bold capitalize text-white">Nos adaptamos a tus necesidades</h2>
@@ -116,7 +113,7 @@ import { CheckIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline';
     </section> -->
 
     <section
-        class="bg-secondary min-h-screen p-10 md:p-24 mb-32 flex flex-col md:flex-row justify-between items-center mt-10">
+        class="bg-secondary min-h-screen p-10 md:p-24 mb-32 flex flex-col md:flex-row justify-between items-center mt-10 md:mt-0">
         <div class="flex-1">
             <h3
                 class="text-2xl text-center md:text-start 2xl:text-8xl md:text-5xl mb-8 font-bold capitalize text-white">
@@ -197,16 +194,14 @@ import { CheckIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline';
         <ContactUs class="mt-10 md:mt-0md:w-1/3" />
     </div>
 
-
-    <section class="p-6 md:p-24 flex flex-col md:flex-row gap-16 md:gap-32 md:items-center h-auto md:h-screen">
+    <section
+        class="location-section p-6 md:p-24 flex flex-col md:flex-row gap-16 md:gap-32 md:items-center h-auto md:h-screen relative">
         <Location />
 
-        <div class="px-4 md:px-0">
+        <div class="px-4 md:px-0 z-10">
             <h5 class="text-xl text-secondary text-center md:text-start">Nuestra Ubicación</h5>
             <span class="text-secondary block mt-2 font-bold text-center md:text-start text-2xl md:text-5xl">Conectate
-                cercas y a
-                distancia</span>
-
+                cercas y a distancia</span>
 
             <div class="text-center md:text-start">
                 <span class="block mt-10 text-xl font-bold mb-3 text-secondary">Sede central</span>
@@ -235,5 +230,23 @@ import { CheckIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline';
 
 .animate-fadeInUp {
     animation: fadeInUp 1s ease-in-out forwards;
+}
+
+.main-section {
+    position: relative;
+    z-index: 1;
+}
+
+.main-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 50%, rgba(255, 215, 64, 0.7) 50%);
+    z-index: -1;
+    opacity: 0.3;
+    transform: rotate(0deg);
 }
 </style>

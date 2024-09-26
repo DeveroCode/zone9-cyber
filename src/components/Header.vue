@@ -1,16 +1,29 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import logo from '/img/logo-sin-texto.svg'
 
 const isOpen = ref(false);
-
+const scroll = ref(0);
 const hancliClickMenu = () => {
     isOpen.value = !isOpen.value
 };
+
+const handleScrollAnimation = () => {
+    scroll.value = window.scrollY;
+};
+
+onMounted(() => {
+    window.addEventListener('scroll', handleScrollAnimation);
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('scroll', handleScrollAnimation);
+});
 </script>
 
 <template>
-    <header class="relative py-1 px-10 flex items-center">
+    <header class="w-full px-10 flex items-center" @scroll="handleScrollAnimation"
+        :class="scroll > 200 ? 'fixed bg-white shadow-lg transition duration-200 ease-in-out z-50' : 'relative transition-all duration-500 ease-in-out'">
         <!-- Logo a la izquierda -->
         <div class="flex items-center flex-shrink-0 justify-center md:justify-normal w-full md:w-auto"
             @click="hancliClickMenu">
