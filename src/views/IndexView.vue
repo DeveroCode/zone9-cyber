@@ -35,7 +35,7 @@ onMounted(() => {
             </button>
         </div>
 
-        <div class="md:parallax md:w-[42%]">
+        <div class="parallax md:w-[42%]">
             <img :src="wifi" ref="parallaxElement" data-depth="1.0"
                 alt="Persona trabajando en su laptop, sentada sobre un router rodeada de iconos de mensajes, emails y aplicaciones de chat como WhatsApp"
                 class="hidden md:block mt-8 md:mt-0" loading="lazy">
