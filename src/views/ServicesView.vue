@@ -23,10 +23,10 @@ const servicios = [
         <div class="absolute inset-0 w-full h-full bg-secondary opacity-85"></div>
         <div class="relative z-10 text-center">
             <!-- Título principal -->
-            <h1 class="text-white text-5xl font-bold mb-4 animate-fadeInUp">Nuestros Servicios</h1>
+            <h1 class="text-white text-2xl md:text-5xl font-bold mb-4 animate-fadeInUp">Nuestros Servicios</h1>
 
             <!-- Subtítulo -->
-            <p class="text-white mb-8 text-xl animate-fadeInUp">
+            <p class="text-white md:mb-8 text-xl animate-fadeInUp">
                 Nos adapatamos a tus necesidades, ofreciendote lo mejor en <span class="font-bold">Zona9</span>
             </p>
 
@@ -38,21 +38,19 @@ const servicios = [
         </div>
     </section>
 
-    <main class="px-24 h-screen flex justify-center items-center">
+    <main class="px-6 md:px-24 h-auto md:h-screen flex flex-col-reverse md:flex-row justify-center items-center mb-32">
+        <!-- Contenido de texto -->
         <div class="md:w-1/2">
             <div class="space-y-6 w-full">
                 <h2
                     class="text-2xl 2xl:text-7xl md:text-5xl w-full font-bold capitalize text-secondary animate-fadeInUp">
-                    Selecciona
-                    tu
-                    servicio preferido</h2>
+                    Selecciona tu servicio preferido
+                </h2>
 
-                <p class="text-lg text-secondary">Ofrecemos experiencias que conectan a las personas y potencian
-                    su
-                    productividad,
-                    brindando
-                    soluciones que
-                    impulsan tu crecimiento en un entorno digital.</p>
+                <p class="text-lg text-secondary">
+                    Ofrecemos experiencias que conectan a las personas y potencian su productividad, brindando
+                    soluciones que impulsan tu crecimiento en un entorno digital.
+                </p>
 
                 <ul class="last-of-type:mb-32">
                     <li class="flex items-center gap-3 text-xl mb-3" v-for="servicio in servicios">
@@ -62,18 +60,18 @@ const servicios = [
                 </ul>
             </div>
 
-
+            <!-- Botón -->
             <RouterLink :to="{ name: 'home' }"
-                class="text-secondary text-xl flex items-center gap-3 font-semibold w-[22%] border-b-[2px] mt-16 py-2 border-primary transition-all duration-300 group hover:text-primary">
+                class="text-secondary text-xl flex items-center gap-3 font-semibold mx-auto md:mx-0 w-[45%] md:w-[22%] border-b-[2px] mt-16 py-2 border-primary transition-all duration-300 group hover:text-primary">
                 Iniciar ahora!
                 <ArrowLongRightIcon
                     class="w-5 h-5 text-secondary mt-1 transition-all duration-300 group-hover:text-primary" />
             </RouterLink>
-
         </div>
 
-        <img :src="ServiceImg" alt="Personaj verificando el tiempo de su servicio desde un telefono" class="w-1/2"
-            loading="lazy">
+        <!-- Imagen -->
+        <img :src="ServiceImg" alt="Personaje verificando el tiempo de su servicio desde un teléfono"
+            class="w-full md:w-1/2 flex-1" loading="lazy">
     </main>
 
     <section
