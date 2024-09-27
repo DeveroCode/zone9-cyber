@@ -18,7 +18,8 @@ const servicios = [
 
 <template>
     <section class="h-96 relative w-full flex flex-col items-center justify-center">
-        <img :src="Background" alt="Fondo" class="absolute inset-0 w-full h-full object-cover opacity-20">
+        <img :src="Background" alt="Imagen representativa mostrando las manos de una mujer trabajando en su computadora"
+            class="absolute inset-0 w-full h-full object-cover opacity-20" loading="lazy" />
         <div class="absolute inset-0 w-full h-full bg-secondary opacity-85"></div>
         <div class="relative z-10 text-center">
             <!-- Título principal -->
@@ -71,7 +72,8 @@ const servicios = [
 
         </div>
 
-        <img :src="ServiceImg" alt="Personaj verificando el tiempo de su servicio desde un telefono" class="w-1/2">
+        <img :src="ServiceImg" alt="Personaj verificando el tiempo de su servicio desde un telefono" class="w-1/2"
+            loading="lazy">
     </main>
 
     <section
