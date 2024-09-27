@@ -65,7 +65,7 @@ onMounted(() => {
     </main>
 
     <section
-        class="bg-secondary min-h-screen p-10 md:p-24 mb-32 flex flex-col md:flex-row justify-between items-center mt-10 md:mt-0">
+        class="bg-secondary min-h-screen p-10 md:p-24 mb-32 flex flex-col md:flex-row justify-between items-center md:mt-0">
         <div class="flex-1">
             <h3
                 class="text-2xl text-center md:text-start 2xl:text-8xl md:text-5xl mb-8 font-bold capitalize text-white">
