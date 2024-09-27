@@ -43,19 +43,6 @@ onMounted(() => {
     </section>
 
 
-    <!-- 
-    <section class="bg-secondary py-10 h-screen flex justify-center items-center px-32 relative">
-        <img :src="background" alt="Background" class="absolute top-0 left-0 w-full h-full object-cover opacity-50">
-        <div class="text-white relative z-10">
-            <h1 class="2xl:text-8xl md:text-7xl md:w-2/3 font-bold">Bienvenido a Zona9.com</h1>
-            <p class="mt-4 text-lg w-2/3">Tu espacio de trabajo en el centro de la ciudad. Conéctate, trabaja y disfruta
-                de un excelente servicio.</p>
-            <button
-                class="text-secondary py-2 px-10 rounded-full bg-primary mt-10 font-bold text-lg hover:bg-white hover:text-secondary transition-all duration-300">Reserva</button>
-        </div>
-        <img :src="wifi" alt="WiFi Logo" class="w-[42%] relative z-10">
-    </section> -->
-
     <main class="main-section p-6 mt-10 md:mt-0 md:p-24 h-auto md:h-screen flex flex-col justify-center relative">
         <h2
             class="text-2xl w-full 2xl:text-7xl md:text-5xl md:w-2/3 font-bold capitalize text-secondary animate-fadeInUp">
@@ -76,41 +63,6 @@ onMounted(() => {
             </section>
         </div>
     </main>
-
-
-    <!-- <section class="bg-secondary h-screen p-24 mb-32 flex flex-col justify-center">
-        <h2 class="2xl:text-8xl md:text-5xl w-2/3 font-bold capitalize text-white">Nos adaptamos a tus necesidades</h2>
-
-
-        <div class="flex justify-between mt-10">
-            <div class="text-gray-300 text-xl">
-                <p class="w-2/3">Creemos que la mejor experiencia en un cibercafé es aquella que se adapta a las
-                    necesidades de nuestros clientes. Por eso, en <span>Zona9</span> ofrecemos una amplia variedad de
-                    servicios. Entre ellos, puedes disfrutar de acceso a computadoras, impresiones,
-                    escaneos y otros servicios relacionados.</p>
-                <br>
-                <p class="w-2/3">Actualizamos continuamente nuestros servicios para que tu tiempo con nosotros sea lo
-                    más productivo y
-                    cómodo posible.</p>
-            </div>
-
-
-            <ul class="text-white w-full text-xl space-y-4">
-                <li class="flex items-center gap-3">
-                    <CheckIcon class="w-6 h-6 text-primary" />
-                    Servicio de impresión por QR
-                </li>
-                <li class="flex items-center gap-3">
-                    <CheckIcon class="w-6 h-6 text-primary" />
-                    Reserva de computadoras
-                </li>
-                <li class="flex items-center gap-3">
-                    <CheckIcon class="w-6 h-6 text-primary" />
-                    Reparación y matenimientode equipo
-                </li>
-            </ul>
-        </div>
-    </section> -->
 
     <section
         class="bg-secondary min-h-screen p-10 md:p-24 mb-32 flex flex-col md:flex-row justify-between items-center mt-10 md:mt-0">
