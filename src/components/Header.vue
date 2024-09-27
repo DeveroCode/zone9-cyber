@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from 'vue-router';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import logo from '/img/logo-sin-texto.svg'
 
@@ -22,8 +23,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <header class="w-full px-10 flex items-center" @scroll="handleScrollAnimation"
-        :class="scroll > 200 ? 'fixed bg-white shadow-lg transition duration-200 ease-in-out z-50' : 'relative transition-all duration-500 ease-in-out'">
+    <header class="w-full px-10 flex items-center bg-white" @scroll="handleScrollAnimation"
+        :class="scroll > 200 ? 'fixed shadow-lg transition duration-200 ease-in-out z-50' : 'relative transition-all duration-500 ease-in-out'">
         <!-- Logo a la izquierda -->
         <div class="flex items-center flex-shrink-0 justify-center md:justify-normal w-full md:w-auto"
             @click="hancliClickMenu">
@@ -33,8 +34,9 @@ onBeforeUnmount(() => {
 
         <!-- Navegación centrada -->
         <nav class="hidden md:block absolute left-1/2 transform -translate-x-1/2 space-x-5 text-lg text-secondary">
+            <RouterLink :to="{ name: 'home' }">Inicio</RouterLink>
             <a href="#">Acerca de</a>
-            <a href="#">Servicios</a>
+            <RouterLink :to="{ name: 'services' }">Servicios</RouterLink>
             <a href="#">Más</a>
             <a href="#">Contacto</a>
         </nav>
