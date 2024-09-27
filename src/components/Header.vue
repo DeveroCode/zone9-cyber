@@ -35,7 +35,7 @@ onBeforeUnmount(() => {
         <!-- Navegación centrada -->
         <nav class="hidden md:block absolute left-1/2 transform -translate-x-1/2 space-x-5 text-lg text-secondary">
             <RouterLink :to="{ name: 'home' }">Inicio</RouterLink>
-            <a href="#">Acerca de</a>
+            <RouterLink :to="{ name: 'about-us' }">Acerca de</RouterLink>
             <RouterLink :to="{ name: 'services' }">Servicios</RouterLink>
             <a href="#">Más</a>
             <a href="#">Contacto</a>
@@ -51,8 +51,9 @@ onBeforeUnmount(() => {
         <!-- Navegación centrada -->
         <nav class="md:hidden absolute top-0 left-[0px] transform -translate-x-1/2 text-lg text-secondary md:static block z-50 text-center"
             :class="isOpen ? 'bg-gray-50 shadow-lg rounded-lg p-4 block w-full mt-[90px] slide-in-top' : 'hidden md:block'">
+            <RouterLink :to="{ name: 'home' }">Inicio</RouterLink>
             <a href="#" class="block py-1 px-5">Acerca de</a>
-            <a href="#" class="block py-1 px-5">Servicios</a>
+            <RouterLink :to="{ name: 'services' }">Servicios</RouterLink>
             <a href="#" class="block py-1 px-5">Más</a>
             <a href="#" class="block py-1 px-5">Contacto</a>
 
