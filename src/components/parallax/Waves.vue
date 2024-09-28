@@ -13,7 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="inset-0 parallax absolute mt-[420px]">
+    <div class="inset-0 parallax absolute md:mt-[420px] 2xl:mt-[530px]">
         <!-- Primera Ola -->
         <svg class="absolute bottom-0 w-full h-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"
             ref="parallaxElement" data-depth="0.05">

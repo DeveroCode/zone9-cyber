@@ -49,13 +49,13 @@ onBeforeUnmount(() => {
 
 
         <!-- Navegación centrada -->
-        <nav class="md:hidden absolute top-0 left-[0px] transform -translate-x-1/2 text-lg text-secondary md:static block z-50 text-center"
-            :class="isOpen ? 'bg-gray-50 shadow-lg rounded-lg p-4 block w-full mt-[90px] slide-in-top' : 'hidden md:block'">
+        <nav class="md:hidden absolute flex flex-col top-0 left-[0px] transform -translate-x-1/2 text-lg text-secondary md:static z-50 text-center"
+            :class="isOpen ? 'bg-white shadow-lg rounded-lg p-4 block w-full mt-[90px] slide-in-top' : 'hidden md:block'">
             <RouterLink :to="{ name: 'home' }">Inicio</RouterLink>
-            <a href="#" class="block py-1 px-5">Acerca de</a>
+            <RouterLink :to="{ name: 'about-us' }">Acerca de</RouterLink>
             <RouterLink :to="{ name: 'services' }">Servicios</RouterLink>
-            <a href="#" class="block py-1 px-5">Más</a>
-            <a href="#" class="block py-1 px-5">Contacto</a>
+            <!-- <a href="#" class="block py-1 px-5">Más</a>
+            <a href="#" class="block py-1 px-5">Contacto</a> -->
 
             <!-- Botones a la derecha -->
             <div class="mt-4 flex flex-col space-y-5">

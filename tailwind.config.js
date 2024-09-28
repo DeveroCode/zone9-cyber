@@ -11,7 +11,7 @@ export default {
         "secondary": "#1f2937",
       },
       screens: {
-        "md": "1600px",
+        "md": "1400px",
         "2xl": "1900px"
       }
     },

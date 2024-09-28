@@ -62,7 +62,7 @@ const servicios = [
 
             <!-- Botón -->
             <RouterLink :to="{ name: 'home' }"
-                class="text-secondary text-xl flex items-center gap-3 font-semibold mx-auto md:mx-0 w-[45%] md:w-[22%] border-b-[2px] mt-16 py-2 border-primary transition-all duration-300 group hover:text-primary">
+                class="text-secondary text-[1.48rem] flex items-center gap-3 font-semibold mx-auto md:mx-0 w-[45%] md:w-[25%] border-b-[2px] mt-16 py-2 border-primary transition-all duration-300 group hover:text-primary">
                 Iniciar ahora!
                 <ArrowLongRightIcon
                     class="w-5 h-5 text-secondary mt-1 transition-all duration-300 group-hover:text-primary" />
