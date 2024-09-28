@@ -23,17 +23,19 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <header class="w-full px-10 flex items-center bg-white" @scroll="handleScrollAnimation"
+    <header class="w-full flex items-center bg-white px-4 md:px-6 xl:px-10" @scroll="handleScrollAnimation"
         :class="scroll > 200 ? 'fixed shadow-lg transition duration-200 ease-in-out z-50' : 'relative transition-all duration-500 ease-in-out'">
+
         <!-- Logo a la izquierda -->
-        <div class="flex items-center flex-shrink-0 justify-center md:justify-normal w-full md:w-auto"
+        <div class="flex items-center justify-center md:justify-start w-full md:w-auto flex-shrink-0"
             @click="hancliClickMenu">
-            <img :src="logo" class="w-24 h-24" alt="Zona9.com Logo">
-            <span class="font-bold text-2xl hidden md:block">Zona9</span>
+            <img :src="logo" class="w-20 h-20 md:w-24 md:h-24" alt="Zona9.com Logo">
+            <span class="font-bold text-xl md:text-2xl hidden md:block">Zona9</span>
         </div>
 
-        <!-- Navegación centrada -->
-        <nav class="hidden md:block absolute left-1/2 transform -translate-x-1/2 space-x-5 text-lg text-secondary">
+        <!-- Navegación centrada en pantallas medianas y grandes -->
+        <nav
+            class="hidden md:block absolute left-1/2 transform -translate-x-1/2 space-x-3 md:space-x-5 lg:space-x-6 text-base md:text-lg text-secondary">
             <RouterLink :to="{ name: 'home' }">Inicio</RouterLink>
             <RouterLink :to="{ name: 'about-us' }">Acerca de</RouterLink>
             <RouterLink :to="{ name: 'services' }">Servicios</RouterLink>
@@ -41,29 +43,29 @@ onBeforeUnmount(() => {
             <a href="#">Contacto</a>
         </nav>
 
-        <!-- Botones a la derecha -->
-        <div class="hidden md:block ml-auto space-x-5">
-            <button class="text-white py-2 px-10 rounded-full bg-secondary">Iniciar</button>
-            <button class="text-secondary py-2 px-10 rounded-full bg-primary">Reserva</button>
+        <!-- Botones a la derecha en pantallas medianas y grandes -->
+        <div class="hidden md:flex ml-auto space-x-3 md:space-x-5">
+            <button
+                class="text-white py-1.5 px-6 md:py-2 md:px-8 lg:px-10 rounded-full bg-secondary text-sm md:text-base lg:text-lg">Iniciar</button>
+            <button
+                class="text-secondary py-1.5 px-6 md:py-2 md:px-8 lg:px-10 rounded-full bg-primary text-sm md:text-base lg:text-lg">Reserva</button>
         </div>
 
-
-        <!-- Navegación centrada -->
-        <nav class="md:hidden absolute flex flex-col top-0 left-[0px] transform -translate-x-1/2 text-lg text-secondary md:static z-50 text-center"
-            :class="isOpen ? 'bg-white shadow-lg rounded-lg p-4 block w-full mt-[90px] slide-in-top' : 'hidden md:block'">
+        <!-- Navegación para móviles -->
+        <nav class="md:hidden absolute flex flex-col top-0 left-0 transform -translate-x-1/2 text-lg text-secondary z-50 text-center"
+            :class="isOpen ? 'bg-white shadow-lg rounded-lg p-4 block w-full mt-[90px] slide-in-top' : 'hidden'">
             <RouterLink :to="{ name: 'home' }">Inicio</RouterLink>
             <RouterLink :to="{ name: 'about-us' }">Acerca de</RouterLink>
             <RouterLink :to="{ name: 'services' }">Servicios</RouterLink>
-            <!-- <a href="#" class="block py-1 px-5">Más</a>
-            <a href="#" class="block py-1 px-5">Contacto</a> -->
 
-            <!-- Botones a la derecha -->
+            <!-- Botones para móviles -->
             <div class="mt-4 flex flex-col space-y-5">
                 <button class="text-white py-2 px-10 rounded-full bg-secondary">Iniciar</button>
                 <button class="text-secondary py-2 px-10 rounded-full bg-primary">Reserva</button>
             </div>
         </nav>
     </header>
+
 </template>
 
 
