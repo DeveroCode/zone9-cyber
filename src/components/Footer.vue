@@ -5,7 +5,7 @@ const getYear = () => new Date().getFullYear()
 <template>
     <footer class="p-6 md:p-10 bg-secondary flex flex-col md:flex-row justify-between items-center">
         <span class="text-sm text-white text-center md:text-left">
-            © {{ getYear() }} Zona9.com - Todos los derechos reservados ❤️ DeveroCode
+            © {{ getYear() }} Zona9.com - Todos los derechos reservados ❤️ Misael Durán
         </span>
 
         <nav class="text-sm text-white space-x-5 mt-4 md:mt-0">
