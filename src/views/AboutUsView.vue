@@ -18,7 +18,7 @@ onMounted(() => {
     <main
         class="relative min-h-screen overflow-hidden flex flex-col md:flex-row justify-between px-4 md:px-32 items-center">
         <!-- Título central -->
-        <div class="text-center w-full md:w-1/3 mb-8 md:mb-32 2xl:mb-64">
+        <div class="text-center w-full md:w-1/2  mb-8 md:mb-32 2xl:mb-64">
             <h1 class="text-3xl md:text-5xl 2xl:text-8xl font-bold text-secondary mt-10">Zona09.com</h1>
             <span class="text-sm text-gray-600 2xl:text-2xl">Nos adaptamos a tus necesidades</span>
 

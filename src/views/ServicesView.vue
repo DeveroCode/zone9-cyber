@@ -41,9 +41,9 @@ const servicios = [
     <main class="px-6 md:px-24 h-auto md:h-screen flex flex-col-reverse md:flex-row justify-center items-center mb-32">
         <!-- Contenido de texto -->
         <div class="md:w-1/2">
-            <div class="space-y-6 w-full">
+            <div class="space-y-6 w-full py-10">
                 <h2
-                    class="text-2xl 2xl:text-7xl md:text-5xl w-full font-bold capitalize text-secondary animate-fadeInUp">
+                    class="text-2xl 2xl:text-7xl md:text-5xl md:mt-32 w-full font-bold capitalize text-secondary animate-fadeInUp">
                     Selecciona tu servicio preferido
                 </h2>
 
@@ -62,7 +62,7 @@ const servicios = [
 
             <!-- Botón -->
             <RouterLink :to="{ name: 'home' }"
-                class="text-secondary text-[1.48rem] flex items-center gap-3 font-semibold mx-auto md:mx-0 w-[45%] md:w-[25%] border-b-[2px] mt-16 py-2 border-primary transition-all duration-300 group hover:text-primary">
+                class="text-secondary text-2xl flex items-center gap-3 font-semibold mx-auto md:mx-0 w-[45%] md:w-[28%] border-b-[2px] mt-16 py-2 border-primary transition-all duration-300 group hover:text-primary">
                 Iniciar ahora!
                 <ArrowLongRightIcon
                     class="w-5 h-5 text-secondary mt-1 transition-all duration-300 group-hover:text-primary" />

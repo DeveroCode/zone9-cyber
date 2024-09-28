@@ -22,7 +22,7 @@ onMounted(() => {
 <template>
     <section class="bg-secondary py-10 h-screen flex flex-col md:flex-row justify-center items-center px-4 md:px-32 ">
         <div class="text-white text-center md:text-left">
-            <h1 class="text-4xl md:text-7xl 2xl:text-8xl w-full md:w-2/3 font-bold animate-fadeInUp">
+            <h1 class="text-4x lg:text-5xl xl:text-7xl 2xl:text-8xl w-full md:w-2/3 font-bold animate-fadeInUp">
                 Bienvenido a Zona9.com
             </h1>
             <p class="mt-4 text-lg md:text-lg md:w-2/3 animate-fadeInUp">
@@ -35,27 +35,27 @@ onMounted(() => {
             </button>
         </div>
 
-        <div class="parallax md:w-[42%]">
+        <div class="parallax lg:w-[80%] xl:w-[42%]">
             <img :src="wifi" ref="parallaxElement" data-depth="1.0"
                 alt="Persona trabajando en su laptop, sentada sobre un router rodeada de iconos de mensajes, emails y aplicaciones de chat como WhatsApp"
-                class="hidden md:block mt-8 md:mt-0" loading="lazy">
+                class="hidden md:block mt-8 md:mt-0 w-full" loading="lazy">
         </div>
     </section>
 
 
     <main class="main-section p-6 mt-10 md:mt-0 md:p-24 h-auto md:h-screen flex flex-col justify-center relative">
         <h2
-            class="text-2xl w-full 2xl:text-7xl md:text-5xl md:w-2/3 font-bold capitalize text-secondary animate-fadeInUp">
+            class="text-2xl w-full 2xl:text-7xl lg:text-4xl xl:text-5xl md:w-2/3 font-bold capitalize text-secondary animate-fadeInUp">
             creemos que cada experiencia debe ser eficiente y agradable.
         </h2>
         <div class="mt-10">
-            <p class="text-lg 2xl:text-xl text-secondary md:w-1/2">
+            <p class="text-lg 2xl:text-xl text-secondary xl:w-1/2">
                 Fundada en 2018, Zona9 ha brindado un servicio de alta calidad a la comunidad de Ascension, Chihuahua.
                 Nuestro principal objetivo es proporcionar una experiencia satisfactoria y segura a todos nuestros
                 clientes.
             </p>
             <section>
-                <span class="text-lg mt-10 block 2xl:text-xl text-secondary md:w-1/2">
+                <span class="text-lg mt-10 block 2xl:text-xl text-secondary xl:w-1/2">
                     Sea cual sea el servicio de su elección, nos aseguraremos de que esté libre de riesgos y sea
                     entretenido en todo momento.
                 </span>
