@@ -52,8 +52,7 @@ const servicios = [
 
                 <p class="text-base md:text-lg xl:text-xl 2xl:text-2xl text-secondary">
                     Ofrecemos experiencias que conectan a las personas y potencian su productividad, brindando
-                    soluciones que
-                    impulsan tu crecimiento en un entorno digital.
+                    soluciones que impulsan tu crecimiento en un entorno digital.
                 </p>
 
                 <ul class="space-y-3">
@@ -67,17 +66,17 @@ const servicios = [
 
             <!-- Botón -->
             <RouterLink :to="{ name: 'home' }"
-                class="text-secondary text-xl md:text-2xl xl:text-3xl flex items-center gap-3 font-semibold mx-auto md:mx-0 w-[60%] md:w-[40%] xl:w-[28%] border-b-[2px] mt-16 py-2 border-primary transition-all duration-300 group hover:text-primary">
+                class="text-secondary font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl inline-flex items-center gap-4 border-b-2 mt-2 py-3 border-primary transition-all duration-300 group hover:text-primary">
                 Iniciar ahora!
                 <ArrowLongRightIcon
-                    class="w-5 h-5 text-secondary mt-1 transition-all duration-300 group-hover:text-primary" />
+                    class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-secondary mt-1 transition-all duration-300 group-hover:text-primary" />
             </RouterLink>
         </div>
-
         <!-- Imagen -->
         <img :src="ServiceImg" alt="Personaje verificando el tiempo de su servicio desde un teléfono"
             class="w-full md:w-1/2 flex-1" loading="lazy">
     </main>
+
 
     <section
         class="p-6 md:p-16 xl:p-24 2xl:p-32 flex flex-col md:flex-row gap-8 md:gap-16 xl:gap-24 2xl:gap-32 md:items-center h-auto md:h-screen relative">
@@ -105,40 +104,3 @@ const servicios = [
     </section>
 
 </template>
-
-
-<style scoped>
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-fadeInUp {
-    animation: fadeInUp 1s ease-in-out forwards;
-}
-
-.main-section {
-    position: relative;
-    z-index: 1;
-}
-
-.main-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 50%, rgba(255, 215, 64, 0.7) 50%);
-    z-index: -1;
-    opacity: 0.3;
-    transform: rotate(0deg);
-}
-</style>

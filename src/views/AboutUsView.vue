@@ -1,8 +1,9 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import Zone from '/img/zone.svg'
+import Profile from '/img/profile-example.png'
 import Waves from '@/components/parallax/Waves.vue'
 import Parallax from 'parallax-js'
-import Zone from '/img/zone.svg'
 
 const peopleParallax = ref(null)
 
@@ -11,7 +12,7 @@ onMounted(() => {
     if (scene) {
         new Parallax(scene)
     }
-})
+});
 </script>
 
 <template>
@@ -30,12 +31,26 @@ onMounted(() => {
         </div>
 
         <div class="people">
-            <img :src="Zone" class="h-[390px] mb-8 md:mb-32 2xl:mb-20 2xl:mr-32 md:mr-0"
+            <img :src="Zone" loading="lazy"
+                class="h-[390px] mb-8 md:mb-32 lg:mb-10 xl:-mb-10 2xl:mb-16 2xl:mr-32 md:mr-0"
                 alt="Persona caminando sobre olas de arena, cargando una laptop y lista para iniciar su jornada laboral"
                 ref="peopleParallax" data-depth="0.3">
         </div>
-
-        <!-- Olas SVG -->
         <Waves class="md:block hidden" />
     </main>
+
+
+    <section class="min-h-screen flex flex-col items-center justify-center main-section">
+        <h2 class="text-2xl md:text-4xl font-semibold text-secondary">Conoce a nuestro equipo</h2>
+
+
+        <div class="mt-10">
+            <img :src="Profile" class="w-32 h-32 mt-4 mx-auto" alt="imagen representativa de perfil de una persona">
+            <p class="text-secondary text-2xl font-bold">Guadalupe Hernández</p>
+            <span class="text-center text-gray-500 block">@Administradora</span>
+        </div>
+
+        <h3 class="text-3xl md:text-5xl font-semibold text-secondary text-center py-16">Ofreciendo soluciones desde 2018
+        </h3>
+    </section>
 </template>

@@ -39,7 +39,6 @@ onBeforeUnmount(() => {
             <RouterLink :to="{ name: 'home' }">Inicio</RouterLink>
             <RouterLink :to="{ name: 'about-us' }">Acerca de</RouterLink>
             <RouterLink :to="{ name: 'services' }">Servicios</RouterLink>
-            <a href="#">Más</a>
             <a href="#">Contacto</a>
         </nav>
 
@@ -53,7 +52,7 @@ onBeforeUnmount(() => {
 
         <!-- Navegación para móviles -->
         <nav class="md:hidden absolute flex flex-col top-0 left-0 transform -translate-x-1/2 text-lg text-secondary z-50 text-center"
-            :class="isOpen ? 'bg-white shadow-lg rounded-lg p-4 block w-full mt-[90px] slide-in-top' : 'hidden'">
+            :class="isOpen ? 'bg-white shadow-lg p-4 block w-full mt-[79px] slide-in-top' : 'hidden'">
             <RouterLink :to="{ name: 'home' }">Inicio</RouterLink>
             <RouterLink :to="{ name: 'about-us' }">Acerca de</RouterLink>
             <RouterLink :to="{ name: 'services' }">Servicios</RouterLink>

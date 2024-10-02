@@ -90,7 +90,7 @@ onMounted(() => {
     </section>
 
     <!-- Sección de contacto -->
-    <div class="p-6 md:p-16 lg:p-24 flex flex-col md:flex-row justify-between items-center">
+    <div class="mx-auto p-6 md:p-16 lg:p-24 flex flex-col md:flex-row justify-between items-center">
         <div class="md:w-2/3">
             <h4 class="font-bold text-2xl md:text-4xl lg:text-5xl text-secondary">Contáctanos</h4>
             <p class="text-secondary md:text-xl mt-4 lg:mt-8 md:pr-8 lg:pr-0">Email, llamada o completa el formulario
@@ -145,7 +145,7 @@ onMounted(() => {
 </template>
 
 
-<style scoped>
+<style>
 @keyframes fadeInUp {
     from {
         opacity: 0;
