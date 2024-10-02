@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import Parallax from 'parallax-js'
 import { CheckIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline';
+import Button from '@/components/Links and Buttons/Buttons.vue';
 import Services from '@/components/Services.vue'
 import ContactUs from '@/components/Contact-us.vue'
 import Location from '@/components/Location.vue'
@@ -26,13 +27,10 @@ onMounted(() => {
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold animate-fadeInUp">
                 Bienvenido a Zona9.com
             </h1>
-            <p class="mt-4 text-base md:text-lg lg:text-xl animate-fadeInUp">
+            <p class="mt-4 mb-10 text-base md:text-lg lg:text-xl animate-fadeInUp">
                 Tu espacio de trabajo en el centro de la ciudad. Conéctate, trabaja y disfruta de un excelente servicio.
             </p>
-            <button
-                class="text-secondary py-2 px-6 md:px-8 lg:px-10 rounded-full bg-primary mt-6 lg:mt-10 font-bold text-base md:text-lg lg:text-xl hover:bg-white hover:text-secondary transition-all duration-300">
-                Reserva
-            </button>
+            <Button>Reserva</Button>
         </div>
 
         <div class="parallax lg:w-[60%] xl:w-[55%] 2xl:w-[45%]">

@@ -1,6 +1,9 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import Link from '@/components/Links and Buttons/Link.vue';
+import Button from '@/components/Links and Buttons/Buttons.vue';
+import SecondButton from '@/components/Links and Buttons/SecondButton.vue';
 import logo from '/img/logo-sin-texto.svg'
 
 const isOpen = ref(false);
@@ -34,20 +37,17 @@ onBeforeUnmount(() => {
         </div>
 
         <!-- Navegación centrada en pantallas medianas y grandes -->
-        <nav
-            class="hidden md:block absolute left-1/2 transform -translate-x-1/2 space-x-3 md:space-x-5 lg:space-x-6 text-base md:text-lg text-secondary">
-            <RouterLink :to="{ name: 'home' }">Inicio</RouterLink>
-            <RouterLink :to="{ name: 'about-us' }">Acerca de</RouterLink>
-            <RouterLink :to="{ name: 'services' }">Servicios</RouterLink>
-            <a href="#">Contacto</a>
+        <nav class="hidden md:block absolute left-1/2 transform -translate-x-1/2 space-x-3 md:space-x-5">
+            <Link to="home">Inicio</Link>
+            <Link to="about-us">Acerca de</Link>
+            <Link to="services">Servicios</Link>
+            <Link to="about-us">Contacto</Link>
         </nav>
 
         <!-- Botones a la derecha en pantallas medianas y grandes -->
         <div class="hidden md:flex ml-auto space-x-3 md:space-x-5">
-            <button
-                class="text-white py-1.5 px-6 md:py-2 md:px-8 lg:px-10 rounded-full bg-secondary text-sm md:text-base lg:text-lg">Iniciar</button>
-            <button
-                class="text-secondary py-1.5 px-6 md:py-2 md:px-8 lg:px-10 rounded-full bg-primary text-sm md:text-base lg:text-lg">Reserva</button>
+            <SecondButton type="bg-secondary text-white">Reservar</SecondButton>
+            <SecondButton type="primary text-secondary">Iniciar</SecondButton>
         </div>
 
         <!-- Navegación para móviles -->
@@ -59,8 +59,8 @@ onBeforeUnmount(() => {
 
             <!-- Botones para móviles -->
             <div class="mt-4 flex flex-col space-y-5">
-                <button class="text-white py-2 px-10 rounded-full bg-secondary">Iniciar</button>
-                <button class="text-secondary py-2 px-10 rounded-full bg-primary">Reserva</button>
+                <SecondButton type="bg-secondary text-white">Reservar</SecondButton>
+                <SecondButton type="primary text-secondary">Iniciar</SecondButton>
             </div>
         </nav>
     </header>
