@@ -1,13 +1,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import background from '/img/background.jpg'
-import working from '/img/working.svg'
-import wifi from '/img/logo-wifi.svg'
+import Parallax from 'parallax-js'
+import { CheckIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline';
 import Services from '@/components/Services.vue'
 import ContactUs from '@/components/Contact-us.vue'
 import Location from '@/components/Location.vue'
-import Parallax from 'parallax-js'
-import { CheckIcon, EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline';
+import Ubicacion from '@/components/Ubication.vue'
+import background from '/img/background.jpg'
+import working from '/img/working.svg'
+import wifi from '/img/logo-wifi.svg'
 
 const parallaxElement = ref(null)
 
@@ -130,18 +131,7 @@ onMounted(() => {
     </div>
 
     <!-- Ubicación -->
-    <section class="location-section p-6 md:p-16 lg:p-24 flex flex-col md:flex-row gap-16 md:gap-32 items-center">
-        <Location />
-        <div class="text-center md:text-left">
-            <h5 class="text-xl lg:text-2xl text-secondary">Nuestra Ubicación</h5>
-            <p class="text-secondary mt-2 text-2xl font-bold lg:text-3xl">Conéctate cercas y a distancia</p>
-            <div class="mt-6">
-                <p class="text-secondary">Zona9.com</p>
-                <p class="text-secondary">Ascención, Chihuahua</p>
-                <p class="text-secondary">C.2 Naciones 207, Col. Centro, 31820, Chihuahua</p>
-            </div>
-        </div>
-    </section>
+    <Ubicacion />
 </template>
 
 

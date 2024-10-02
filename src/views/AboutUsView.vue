@@ -44,10 +44,18 @@ onMounted(() => {
         <h2 class="text-2xl md:text-4xl font-semibold text-secondary">Conoce a nuestro equipo</h2>
 
 
-        <div class="mt-10">
-            <img :src="Profile" class="w-32 h-32 mt-4 mx-auto" alt="imagen representativa de perfil de una persona">
-            <p class="text-secondary text-2xl font-bold">Guadalupe Hernández</p>
-            <span class="text-center text-gray-500 block">@Administradora</span>
+        <div class="mt-10 flex gap-24">
+            <div>
+                <img :src="Profile" class="w-32 h-32 mt-4 mx-auto" alt="imagen representativa de perfil de una persona">
+                <p class="text-secondary text-2xl font-bold">Guadalupe Hernández</p>
+                <span class="text-center text-gray-500 block">@Empleada</span>
+            </div>
+
+            <div>
+                <img :src="Profile" class="w-32 h-32 mt-4 mx-auto" alt="imagen representativa de perfil de una persona">
+                <p class="text-secondary text-2xl font-bold">Sergio Eduaro Apodaca</p>
+                <span class="text-center text-gray-500 block">@Administradora</span>
+            </div>
         </div>
 
         <h3 class="text-3xl md:text-5xl font-semibold text-secondary text-center py-16">Ofreciendo soluciones desde 2018
