@@ -1,0 +1,67 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+storage/*.key
+storage/logs/*
+bootstrap/cache/*
+
+# Composer dependencies
+/vendor/
+
+# Laravel environment files
+.env
+.env.backup
+.env.*.backup
+.env.local
+.env.development
+.env.production
+.env.testing
+
+# Node dependencies
+/node_modules/
+/public/hot
+/public/storage
+/public/mix-manifest.json
+/public/css/*.map
+/public/js/*.map
+
+# Laravel generated files
+homestead.json
+homestead.yaml
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore certain compiled assets or directories
+/.idea
+/.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# VueJS build output
+/dist/
+/dist-ssr/
+coverage
+*.local
+
+# Cypress tests
+/cypress/videos/
+/cypress/screenshots/
+
+# Mac and Windows system files
+.DS_Store
+Thumbs.db
+
+# Miscellaneous
+*.tsbuildinfo
