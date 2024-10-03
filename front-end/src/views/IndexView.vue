@@ -49,7 +49,7 @@ onMounted(() => {
                 Fundada en 2018, Zona9 ha brindado un servicio de alta calidad a la comunidad de Ascension, Chihuahua.
             </p>
             <section>
-                <span class="text-lg block mt-4 text-secondary lg:text-xl">
+                <span class="text-lg block mt-4 text-secondary lg:text-2xl">
                     Nos aseguramos de que cada servicio esté libre de riesgos y sea entretenido en todo momento.
                 </span>
                 <Services />
