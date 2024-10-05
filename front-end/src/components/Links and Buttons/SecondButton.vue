@@ -15,7 +15,8 @@ defineProps({
 
 <template>
     <RouterLink
-        :class="`py-1.5 px-6 md:py-2 md:px-8 lg:px-10 rounded-full bg-${type} ${type} text-sm md:text-base lg:text-l`">
+        :class="`py-1.5 px-6 md:py-2 md:px-8 lg:px-10 rounded-full bg-${type} ${type} text-sm md:text-base lg:text-l`"
+        :to="{ name: direction }">
         <slot></slot>
     </RouterLink>
 </template>

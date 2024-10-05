@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import Link from '@/components/Links and Buttons/Link.vue';
 import Button from '@/components/Links and Buttons/Buttons.vue';
@@ -7,13 +7,18 @@ import SecondButton from '@/components/Links and Buttons/SecondButton.vue';
 import logo from '/img/logo-sin-texto.svg'
 
 const isOpen = ref(false);
+const router = useRouter();
 const scroll = ref(0);
 const hancliClickMenu = () => {
     isOpen.value = !isOpen.value
 };
 
 const handleScrollAnimation = () => {
-    scroll.value = window.scrollY;
+    if (router.currentRoute.value.name === 'reservation') {
+        scroll.value = 0;
+    } else {
+        scroll.value = window.scrollY;
+    }
 };
 
 onMounted(() => {
@@ -46,8 +51,8 @@ onBeforeUnmount(() => {
 
         <!-- Botones a la derecha en pantallas medianas y grandes -->
         <div class="hidden md:flex ml-auto space-x-3 md:space-x-5">
-            <SecondButton type="bg-secondary text-white">Reservar</SecondButton>
-            <SecondButton type="primary text-secondary">Iniciar</SecondButton>
+            <SecondButton type="bg-secondary text-white" direction="reservation">Reservar</SecondButton>
+            <SecondButton type="primary text-secondary" direction="services">Iniciar</SecondButton>
         </div>
 
         <!-- Navegación para móviles -->
