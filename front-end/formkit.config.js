@@ -5,8 +5,8 @@ const config = {
     config: {
         classes: generateClasses({
             global: {
-                label: 'block my-2 font-popins text-title md:text-lg xl:text-xl',
                 input: 'w-full border border-gray-300 px-4 py-2 rounded-xl mb-4 md:mb-0',
+                label: 'text-md font-semibold px-2 block mx-auto mb-2',
                 message: 'text-red-500 text-sm font-poppins capitalize'
             },
             submit: {
