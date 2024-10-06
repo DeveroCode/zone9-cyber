@@ -1,28 +1,27 @@
 <script setup>
 import { ref } from 'vue';
+import { generateFolio } from '@/helpers';
 import { computers } from '@/data/computer';
 import { usePcServices } from '@/stores/PcServices';
 import Dialog from '@/components/ReservationModal.vue';
 const services = usePcServices();
 
 const visible = ref(false);
-
-const handleViewModal = () => {
-    visible.value = !visible.value;
-
-    console.log(visible.value);
-}
+const folio = ref('');
+const user = ref({});
+const handleViewModal = () => { visible.value = !visible.value; }
 
 const handleSubmit = ({ ...fromData }) => {
-    const { start, end } = fromData;
-    services.calculateTotalHours(start, end);
+    user.value = fromData;
+    services.calculateTotalHours(user.value.start, user.value.end);
+    folio.value = generateFolio(user.value.name, user.value.last_name, user.value.computer);
     handleViewModal();
 };
 </script>
 
 <template>
     <FormKit type="form" :actions="false" submit-label="Enviar" @submit="handleSubmit"
-        form-class="border border-gray-300 bg-white shadow-lg p-6 md:p-10 rounded-xl space-y-5 mx-auto">
+        form-class="border border-gray-300 bg-white shadow-lg p-6 md:p-10 rounded-xl space-y-5 mx-auto max-w-lg">
         <fieldset class="flex gap-3">
             <FormKit type="text" name="name" placeholder="Incluya un Nombre" label="Nombre" />
             <FormKit type="text" name="last_name" placeholder="Incluya un apellido" label="Apellido" />
@@ -40,7 +39,16 @@ const handleSubmit = ({ ...fromData }) => {
                 value="18:00" help-class="text-xs text-secondary" />
         </fieldset>
         <FormKit type="submit" label="Reservar Maquina" />
+        <p class="text-bold text-secondary py-3 font-semibold text-xs">
+            Al hacer clic en <span class="font-bold text-red-700">Reservar Máquina</span>, la computadora quedará
+            apartada, por lo
+            que es importante
+            que solo
+            realices la reserva cuando estés listo para utilizarla.
+        </p>
+
     </FormKit>
 
-    <Dialog :visible="visible" :handleViewModal="handleViewModal" />
+    <Dialog :visible="visible" :handleViewModal="handleViewModal" :name="user.name" :last_name="user.last_name"
+        :hours="services.total_hours" :pc="user.computer" :folio="folio" :total_pay="services.total_pay" />
 </template>
