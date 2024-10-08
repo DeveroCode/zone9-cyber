@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import { generateFolio } from '@/helpers';
 import { computers } from '@/data/computer';
 import { usePcServices } from '@/stores/PcServices';
@@ -7,6 +7,7 @@ import Dialog from '@/components/ReservationModal.vue';
 const services = usePcServices();
 
 const visible = ref(false);
+const toast = inject('toast');
 const folio = ref('');
 const user = ref({});
 const handleViewModal = () => { visible.value = !visible.value; }
@@ -14,8 +15,15 @@ const handleViewModal = () => { visible.value = !visible.value; }
 const handleSubmit = ({ ...fromData }) => {
     user.value = fromData;
     services.calculateTotalHours(user.value.start, user.value.end);
-    folio.value = generateFolio(user.value.name, user.value.last_name, user.value.computer);
-    handleViewModal();
+    folio.value = generateFolio(user.value.name, user.value.last_name, user.value.pc);
+
+    try {
+        const result = services.reservation({ ...fromData, folio: folio.value });
+        handleViewModal();
+        toast.success(result.response.message);
+    } catch (error) {
+        console.log(error);
+    }
 };
 </script>
 
@@ -26,7 +34,7 @@ const handleSubmit = ({ ...fromData }) => {
             <FormKit type="text" name="name" placeholder="Incluya un Nombre" label="Nombre" />
             <FormKit type="text" name="last_name" placeholder="Incluya un apellido" label="Apellido" />
         </fieldset>
-        <FormKit type="select" name="computer" :options="computers.map(pc => pc.name)" label="Computadora"
+        <FormKit type="select" name="pc" :options="computers.map(pc => pc.name)" label="Computadora"
             input-class="text-secondary" />
         <FormKit type="tel" name="phone" placeholder="Teléfono" label="Ingresa un número de teléfono" />
 
@@ -50,5 +58,5 @@ const handleSubmit = ({ ...fromData }) => {
     </FormKit>
 
     <Dialog :visible="visible" :handleViewModal="handleViewModal" :name="user.name" :last_name="user.last_name"
-        :hours="services.total_hours" :pc="user.computer" :folio="folio" :total_pay="services.total_pay" />
+        :hours="services.total_hours" :pc="user.pc" :folio="folio" :total_pay="services.total_pay" />
 </template>

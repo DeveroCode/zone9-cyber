@@ -27,8 +27,8 @@ class ReservationRequest extends FormRequest
             'folio' => ['required', 'string', 'max:255'],
             'pc' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'numeric', 'digits_between:10,10'],
-            'start' => ['required', 'date_format:H:i', 'after_or_equel:09:00', 'before_or_equel:18:00'],
-            'end' => ['required', 'date_format:H:i', 'after_or_equel:start', 'before_or_equel:18:00'],
+            'start' => ['required', 'date_format:H:i', 'after_or_equal:09:00', 'before_or_equal:18:00'],
+            'end' => ['required', 'date_format:H:i', 'after_or_equal:start', 'before_or_equal:18:00'],
         ];
     }
 

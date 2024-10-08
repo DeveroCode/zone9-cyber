@@ -1,3 +1,4 @@
+import APIReservations from "@/services/APIReservations";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
@@ -12,10 +13,19 @@ export const usePcServices = defineStore("PcServices", () => {
         total_pay.value = total_hours.value * MAX_PRICE;
     }
 
+    async function reservation(data) {
+        try {
+            const response = APIReservations.create(data);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return {
         total_pay,
         total_hours,
         calculateTotalHours,
+        reservation
     }
 });
