@@ -21,7 +21,11 @@ import Reservation from '/img/reservation.svg';
     </div>
 </template>
 
-<style scoped>
+<style>
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
 @keyframes float {
 
     0%,
@@ -32,9 +36,5 @@ import Reservation from '/img/reservation.svg';
     50% {
         transform: translateY(-20px);
     }
-}
-
-.animate-float {
-    animation: float 3s ease-in-out infinite;
 }
 </style>

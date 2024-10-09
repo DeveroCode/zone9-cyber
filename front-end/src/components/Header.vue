@@ -52,7 +52,7 @@ onBeforeUnmount(() => {
         <!-- Botones a la derecha en pantallas medianas y grandes -->
         <div class="hidden md:flex ml-auto space-x-3 md:space-x-5">
             <SecondButton type="secondary text-white" direction="reservation">Reservar</SecondButton>
-            <SecondButton type="primary text-secondary" direction="services">Iniciar</SecondButton>
+            <SecondButton type="primary text-secondary" direction="login">Iniciar</SecondButton>
         </div>
 
         <!-- Navegación para móviles -->

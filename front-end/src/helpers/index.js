@@ -6,3 +6,7 @@ export const generateFolio = (a, b, c) => {
 
     return folio = (firts + date).toUpperCase();
 }
+
+export const toggleModal = (visible) => {
+    visible.value = !visible.value;
+};

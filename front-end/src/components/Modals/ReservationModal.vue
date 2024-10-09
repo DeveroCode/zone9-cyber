@@ -5,7 +5,8 @@ import Button from '@/components/Links and Buttons/SecondButton.vue';
 
 defineProps({
     visible: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     handleViewModal: {
         type: Function,
@@ -38,7 +39,7 @@ defineProps({
             :closable="false">
             <div class="flex justify-between items-center">
                 <span class="text-secondary text-2xl font-semibold">Factura</span>
-                <button class="text-secondary font-bold mt-1" @click="handleViewModal">X</button>
+                <button class="text-secondary font-bold mt-1" @click="handleViewModal(visible)">X</button>
             </div>
 
             <div class="my-8 space-y-5">

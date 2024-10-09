@@ -1,16 +1,20 @@
 <script setup>
 import { ref, inject } from 'vue';
-import { generateFolio } from '@/helpers';
+import { generateFolio, toggleModal } from '@/helpers';
 import { computers } from '@/data/computer';
 import { usePcServices } from '@/stores/PcServices';
-import Dialog from '@/components/ReservationModal.vue';
+import Dialog from '@/components/Modals/ReservationModal.vue';
 const services = usePcServices();
 
 const visible = ref(false);
 const toast = inject('toast');
 const folio = ref('');
 const user = ref({});
-const handleViewModal = () => { visible.value = !visible.value; }
+
+const handleViewModal = () => {
+    toggleModal(visible);
+}
+
 
 const handleSubmit = ({ ...fromData }) => {
     user.value = fromData;
@@ -18,7 +22,7 @@ const handleSubmit = ({ ...fromData }) => {
     folio.value = generateFolio(user.value.name, user.value.last_name, user.value.pc);
 
     try {
-        const result = services.reservation({ ...fromData, folio: folio.value });
+        // const result = services.reservation({ ...fromData, folio: folio.value });
         handleViewModal();
         toast.success(result.response.message);
     } catch (error) {
