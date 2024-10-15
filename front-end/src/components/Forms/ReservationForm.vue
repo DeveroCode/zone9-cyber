@@ -22,7 +22,7 @@ const handleSubmit = ({ ...fromData }) => {
     folio.value = generateFolio(user.value.name, user.value.last_name, user.value.pc);
 
     try {
-        // const result = services.reservation({ ...fromData, folio: folio.value });
+        const result = services.reservation({ ...fromData, folio: folio.value });
         handleViewModal();
         toast.success(result.response.message);
     } catch (error) {
