@@ -1,16 +1,23 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { toggleModal } from '@/helpers';
 import ForgetPasswordModal from '@/components/Modals/ForgetPasswordModal.vue';
+import { authMethods } from '@/stores/AuthMethods';
 
 const visible = ref(false);
+const auth = authMethods();
+
 const handleViewModal = () => {
     toggleModal(visible);
+};
+
+const handleSubmit = ({ ...formData }) => {
+    auth.login(formData);
 };
 </script>
 
 <template>
-    <FormKit type="form" :actions="false" form-class="py-10">
+    <FormKit type="form" :actions="false" form-class="py-10" @submit="handleSubmit">
         <fieldset class="space-y-7">
             <FormKit type="email" name="email" label="Introduce tu correo" placeholder="Correo" />
             <FormKit type="password" name="password" label="Introduce tu contraseña" placeholder="Contraseña" />

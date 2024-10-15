@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Main from '@/layouts/MainLayout.vue'
+import Dashboard from '@/layouts/DashboardLayout.vue'
+import { middlware } from '@/middleware';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,8 +36,34 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('@/views/LoginView.vue')
+    },
+    {
+      path: '/dashboard',
+      component: Dashboard,
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          name: 'dashboard',
+          component: () => import('@/views/Dashboard/IndexView.vue')
+        }
+      ]
     }
   ]
 })
+
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.matched.some(url => url.meta.requiresAuth);
+
+  if (requiresAuth) {
+    try {
+      await middlware(to, from, next);
+    } catch (error) {
+      next({ name: 'login' });
+    }
+  } else {
+    next();
+  }
+});
 
 export default router

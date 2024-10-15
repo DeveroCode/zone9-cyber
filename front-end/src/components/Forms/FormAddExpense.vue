@@ -1,0 +1,28 @@
+<script setup>
+</script>
+
+<template>
+    <div class="bg-white dark:bg-primary-dash rounded-md shadow-lg border p-10 border-secondary space-y-10">
+        <legend class="text-3xl font-semibold text-secondary dark:text-white">Registros de Gastos</legend>
+        <FormKit type="form" :actions="false">
+            <div class="flex gap-3 items-center">
+                <!-- Campo de Nombre -->
+                <FormKit type="text" label="Concepto" label-class="dark:text-white w-[350px]"
+                    placeholder="Nombre del Gasto" />
+
+                <!-- Campo de Apellido -->
+                <FormKit type="number" min="10" label="Monto" label-class="dark:text-white w-[350px]"
+                    placeholder="$0.00" />
+
+                <!-- Campo de Email -->
+                <FormKit type="date" label="Fecha" label-class="dark:text-white w-[350px]" />
+            </div>
+
+            <!-- Botón Agregar Cuenta -->
+            <div class="w-[280px]">
+                <FormKit type="submit" label="Registrar Gasto"
+                    input-class="text-white bg-secondary text-xs py-[8px] rounded-xs" />
+            </div>
+        </FormKit>
+    </div>
+</template>
