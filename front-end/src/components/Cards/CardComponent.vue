@@ -52,8 +52,13 @@ function formatTitlePercentage(title) {
 
         <p class="text-3xl font-bold mt-5" v-if="cuantity">{{ formatStats(cuantity) }}</p>
         <p class="text-3xl font-bold mt-5" v-else>N/A</p>
-        <span class="text-gray-400 text-xs flex mt-3 gap-2 items-center">
-            <ArrowTrendingUpIcon class="w-6 h-6 text-green-600" />{{ percentage }}% {{ formatTitlePercentage(title) }}
+        <span class="text-gray-400 text-xs flex mt-3 gap-2 items-center" v-if="percentage > 0">
+            <ArrowTrendingUpIcon class="w-6 h-6 text-green-600" />{{
+                percentage }}% {{ formatTitlePercentage(title) }}
+        </span>
+        <span class="text-gray-400 text-xs flex mt-3 gap-2 items-center" v-else>
+            <ArrowTrendingDownIcon class="w-6 h-6 text-red-600" />{{
+                percentage }}% de perdidas
         </span>
     </div>
 </template>
