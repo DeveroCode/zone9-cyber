@@ -22,11 +22,12 @@ const handleSubmit = ({ ...fromData }) => {
     folio.value = generateFolio(user.value.name, user.value.last_name, user.value.pc);
 
     try {
-        const result = services.reservation({ ...fromData, folio: folio.value });
+        const result = services.reservation({ ...fromData, folio: folio.value, total_hours: services.total_hours, total_mount: services.total_pay });
         handleViewModal();
         toast.success(result.response.message);
     } catch (error) {
         console.log(error);
+        toast.error('Error al realizar la reserva, por favor intente más tarde');
     }
 };
 </script>

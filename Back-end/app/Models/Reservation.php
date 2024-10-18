@@ -17,5 +17,7 @@ class Reservation extends Model
         'phone',
         'start',
         'end',
+        'total_hours',
+        'total_mount',
     ];
 }

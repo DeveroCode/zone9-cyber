@@ -29,6 +29,8 @@ class ReservationRequest extends FormRequest
             'phone' => ['required', 'numeric', 'digits_between:10,10'],
             'start' => ['required', 'date_format:H:i', 'after_or_equal:09:00', 'before_or_equal:18:00'],
             'end' => ['required', 'date_format:H:i', 'after_or_equal:start', 'before_or_equal:18:00'],
+            'total_hours' => ['required', 'numeric', 'min:1'],
+            'total_mount' => ['required', 'numeric', 'min:17.00'],
         ];
     }
 
@@ -42,6 +44,8 @@ class ReservationRequest extends FormRequest
             'phone.required' => 'El campo telefono es obligatorio',
             'start.required' => 'El campo fecha es obligatorio',
             'end.required' => 'El campo fecha es obligatorio',
+            'total_hours.required' => 'El campo horas es obligatorio',
+            'total_mount.required' => 'El campo monto es obligatorio',
         ];
     }
 }
