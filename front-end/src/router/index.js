@@ -46,6 +46,11 @@ const router = createRouter({
           path: '',
           name: 'dashboard',
           component: () => import('@/views/Dashboard/IndexView.vue')
+        },
+        {
+          path: 'reservations',
+          name: 'reservations',
+          component: () => import('@/views/Dashboard/RentsView.vue')
         }
       ]
     }

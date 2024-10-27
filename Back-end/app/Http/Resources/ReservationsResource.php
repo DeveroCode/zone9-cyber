@@ -23,7 +23,8 @@ class ReservationsResource extends JsonResource
             'pc' => $this->pc,
             'start' => $this->start,
             'end' => $this->end,
-            'day_reservation' => $this->created_at->format('Y-m-d'),
+            'total_mount' => $this->total_mount,
+            'day_reservation' => $this->created_at->format('d/m/Y'),
         ];
     }
 }

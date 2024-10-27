@@ -16,19 +16,24 @@ const handleViewModal = () => {
 }
 
 
-const handleSubmit = ({ ...fromData }) => {
-    user.value = fromData;
-    services.calculateTotalHours(user.value.start, user.value.end);
-    folio.value = generateFolio(user.value.name, user.value.last_name, user.value.pc);
+const handleSubmit = ({ ...formData }) => {
+    services.onCreateReservation({ ...formData });
+    console.log(services.reservation.value);
+    // user.value = fromData;
+    // services.calculateTotalHours(user.value.start, user.value.end);
+    // folio.value = generateFolio(user.value.name, user.value.last_name, user.value.pc);
+    // alert(user.value.pc);
+    // console.log(services.totalAmount.value);
 
-    try {
-        const result = services.reservation({ ...fromData, folio: folio.value, total_hours: services.total_hours, total_mount: services.total_pay });
-        handleViewModal();
-        toast.success(result.response.message);
-    } catch (error) {
-        console.log(error);
-        toast.error('Error al realizar la reserva, por favor intente más tarde');
-    }
+    // try {
+
+    //     // const result = services.reservation({ ...fromData, folio: folio.value, total_hours: services.total_hours, total_mount: services.total_pay });
+    //     // handleViewModal();
+    //     // toast.success(result.response.message);
+    // } catch (error) {
+    //     console.log(error);
+    //     toast.error('Error al realizar la reserva, por favor intente más tarde');
+    // }
 };
 </script>
 
@@ -59,7 +64,6 @@ const handleSubmit = ({ ...fromData }) => {
             que solo
             realices la reserva cuando estés listo para utilizarla.
         </p>
-
     </FormKit>
 
     <Dialog :visible="visible" :handleViewModal="handleViewModal" :name="user.name" :last_name="user.last_name"

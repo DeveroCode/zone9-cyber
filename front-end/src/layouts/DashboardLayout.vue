@@ -1,7 +1,10 @@
 <script setup>
+import { useRoute } from 'vue-router';
 import AsideAdmin from '@/components/AsideAdmin.vue';
 import { authMethods } from '@/stores/AuthMethods';
+import { setHeaderTitle } from '@/helpers';
 
+const router = useRoute();
 const useMethod = authMethods();
 </script>
 
@@ -11,10 +14,10 @@ const useMethod = authMethods();
         <div class="w-full flex flex-col px-16 py-10 overflow-auto">
             <!-- Header -->
             <header class="max-h-72 bg-white py-6 px-16 rounded-md shadow-md dark:bg-primary-dash dark:text-white">
-                <h1 class="text-3xl font-bold">Bienvenido {{ useMethod.user.name }}</h1>
+                <h1 class="text-3xl font-bold">{{ setHeaderTitle(router.name) }}</h1>
             </header>
 
-            <!-- Contenedor de contenido con scroll -->
+            <!-- Renderiza todas nuestras vistas que requieran este layout -->
             <RouterView />
         </div>
     </section>
