@@ -27,7 +27,7 @@ class StatsCollection extends ResourceCollection
         $endOfpreviousMonth = $today->copy()->subMonth()->endOfMonth();
 
         // Calculate the percentage
-        // Percentage mounth
+        // Percentage amounth
         $currentMonthEarnings = $this->monthlyIncomes($startOfMonth, $endOfMonth);
         $previousMonthEarnings = $this->monthlyIncomes($startOfpreviousMonth, $endOfpreviousMonth);
 
@@ -89,12 +89,12 @@ class StatsCollection extends ResourceCollection
 
     private function monthlyIncomes($startOfMonth, $endOfMonth)
     {
-        return Reservation::whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('total_mount');
+        return Reservation::whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('total_amount');
     }
 
     private function dailyIncome($today)
     {
-        return Reservation::whereDate('created_at', $today)->sum('total_mount');
+        return Reservation::whereDate('created_at', $today)->sum('total_amount');
     }
 
     private function monthlyRents($startOfMonth, $endOfMonth)
@@ -104,11 +104,11 @@ class StatsCollection extends ResourceCollection
 
     private function totalEarnings($today)
     {
-        return Reservation::whereDate('created_at', $today)->where('loan', true)->sum('total_mount');
+        return Reservation::whereDate('created_at', $today)->where('loan', true)->sum('total_amount');
     }
 
     private function yesterdayEarnings($day = null)
     {
-        return Reservation::whereDate('created_at', $day)->where('loan', true)->sum('total_mount');
+        return Reservation::whereDate('created_at', $day)->where('loan', true)->sum('total_amount');
     }
 }
