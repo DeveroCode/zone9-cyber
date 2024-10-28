@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->integer('total_mount');
+            $table->float('total_amount', 8, 2)->default(0.00);
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('reservations', function (Blueprint $table) {
-            $table->dropColumn('total_mount');
+            $table->dropColumn('total_amount');
         });
     }
 };

@@ -35,10 +35,10 @@ class ReservationController extends Controller
             'start' => $data['start'],
             'end' => $data['end'],
             'total_hours' => $data['total_hours'],
-            'total_mount' => $data['total_mount'],
+            'total_amount' => $data['total_amount'],
         ]);
 
-        return response()->json(['message' => "Reservacion creada"], 201);
+        return response()->json(['message' => "Reservacion creada con exito"], 201);
     }
 
     public function create(){

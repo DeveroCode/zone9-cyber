@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('reservations', function (Blueprint $table) {
             //
-            $table->integer('total_hours');
+            $table->float('total_hours', 8, 2)->default(0.00);
         });
     }
 

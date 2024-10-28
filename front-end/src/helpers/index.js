@@ -25,7 +25,7 @@ export const convertToTime = time => {
     const hours = Math.floor(time / 100);
     const minutes = time % 100;
 
-    return `${hours}:${minutes}`;
+    return `${hours}.${minutes}`;
 }
 
 export const setHeaderTitle = (title) => {

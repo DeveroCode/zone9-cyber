@@ -1,39 +1,36 @@
 <script setup>
-import { ref, inject } from 'vue';
+import { ref, inject, nextTick } from 'vue';
 import { generateFolio, toggleModal } from '@/helpers';
 import { computers } from '@/data/computer';
 import { usePcServices } from '@/stores/PcServices';
 import Dialog from '@/components/Modals/ReservationModal.vue';
-const services = usePcServices();
 
+
+const services = usePcServices();
 const visible = ref(false);
 const toast = inject('toast');
 const folio = ref('');
 const user = ref({});
-
 const handleViewModal = () => {
     toggleModal(visible);
 }
 
 
-const handleSubmit = ({ ...formData }) => {
+const handleSubmit = async ({ ...formData }) => {
+    user.value = formData;
+    folio.value = generateFolio(formData.name, formData.last_name, formData.pc);
     services.onCreateReservation({ ...formData });
-    console.log(services.reservation.value);
-    // user.value = fromData;
-    // services.calculateTotalHours(user.value.start, user.value.end);
-    // folio.value = generateFolio(user.value.name, user.value.last_name, user.value.pc);
-    // alert(user.value.pc);
-    // console.log(services.totalAmount.value);
-
-    // try {
-
-    //     // const result = services.reservation({ ...fromData, folio: folio.value, total_hours: services.total_hours, total_mount: services.total_pay });
-    //     // handleViewModal();
-    //     // toast.success(result.response.message);
-    // } catch (error) {
-    //     console.log(error);
-    //     toast.error('Error al realizar la reserva, por favor intente más tarde');
-    // }
+    try {
+        await nextTick();
+        const result = services.reservation({ ...formData, folio: folio.value, total_hours: services.totalHours, total_amount: services.totalAmount });
+        handleViewModal();
+        if (result.status) {
+            toast.success(result.response.message, { duration: 2000 });
+        }
+    } catch (error) {
+        console.log(error.message);
+        toast.error('Error al realizar la reserva, por favor intente más tarde');
+    }
 };
 </script>
 
@@ -67,5 +64,5 @@ const handleSubmit = ({ ...formData }) => {
     </FormKit>
 
     <Dialog :visible="visible" :handleViewModal="handleViewModal" :name="user.name" :last_name="user.last_name"
-        :hours="services.total_hours" :pc="user.pc" :folio="folio" :total_pay="services.total_pay" />
+        :hours="services.totalHours" :pc="user.pc" :folio="folio" :total_pay="services.totalAmount" />
 </template>

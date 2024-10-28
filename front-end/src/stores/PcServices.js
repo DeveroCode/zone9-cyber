@@ -29,16 +29,26 @@ export const usePcServices = defineStore("PcServices", () => {
 
             return total + (endTime - startTime);
         }, 0);
-
         hour.value = hours;
         return convertToTime(hours)
     });
 
     const totalAmount = computed(() => {
         const minutes = Math.floor(hour.value / 100) * 60 + (hour.value % 100);
-        console.log(`Minutos totales: ${minutes}`);
         return (minutes / 60) * MAX_PRICE;
     });
+
+    async function reservation(data) {
+        try {
+            const response = APIReservations.create(data);
+            console.log(data);
+            return { succes: true, message: response.data.message };
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     // variable to edit reservation
     const newPay = ref(0);
     const serviceData = reactive({
@@ -73,13 +83,6 @@ export const usePcServices = defineStore("PcServices", () => {
         console.log(newPay.value);
     }
 
-    async function reservation(data) {
-        try {
-            const response = APIReservations.create(data);
-        } catch (error) {
-        }
-    }
-
     onMounted(async () => {
         const { data } = await APIReservations.getReservations();
         reservations.value = data.data;
@@ -101,11 +104,11 @@ export const usePcServices = defineStore("PcServices", () => {
         totalAmount,
         rent,
         hour,
+        reservation, // => Crear la reservacion
         handleSelectServiceToEdit,
         serviceData,
         visible,
         calculateChanges,
-        reservation,
         reservations,
         stats,
         getStats,

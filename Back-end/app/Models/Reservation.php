@@ -18,6 +18,6 @@ class Reservation extends Model
         'start',
         'end',
         'total_hours',
-        'total_mount',
+        'total_amount',
     ];
 }
