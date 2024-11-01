@@ -9,5 +9,8 @@ export default {
     },
     getStats() {
         return authorization('get', '/stats');
+    },
+    update(id, data) {
+        return authorization('post', `/update-reservation/${id}`, data);
     }
 }

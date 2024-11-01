@@ -1,23 +1,36 @@
 import APIReservations from "@/services/APIReservations";
 import { defineStore } from "pinia";
 import { ref, onMounted, computed, reactive } from "vue";
-import { convertToMilitaryTime, convertToTime, toggleModal } from "@/helpers";
+import { convertToMilitaryTime, convertToTime, formatCurrency } from "@/helpers";
 
 export const usePcServices = defineStore("PcServices", () => {
     // Utilities
     const MAX_PRICE = 17;
     const visible = ref(false);
 
-    // Variable to create a reservations
+    // Variable to create, edit a reservations
     const hour = ref(0);
     const reservations = ref([]);
     const rent = ref([]);
     const stats = ref({});
+    const updateTotal = ref(0);
+
+    // Variable to edit a reservation
+    const oldReservation = ref({});
+    const differencePay = ref(0);
+    const original = ref({});
 
 
     // Functions to create a new Reservation
-    function onCreateReservation(reservation) {
-        rent.value.push({ ...reservation });
+    function onCreateReservation(reservation, id = null) {
+        if (!id) {
+            rent.value.push({ ...reservation });
+        } else {
+            oldReservation.value = reservation;
+            original.value = reservations.value.find(r => r.id === id);;
+            updateReservation();
+        }
+
     }
 
     const totalHours = computed(() => {
@@ -41,52 +54,12 @@ export const usePcServices = defineStore("PcServices", () => {
     async function reservation(data) {
         try {
             const response = APIReservations.create(data);
-            console.log(data);
             return { succes: true, message: response.data.message };
         } catch (error) {
             console.log(error);
         }
     }
 
-
-    // variable to edit reservation
-    const newPay = ref(0);
-    const serviceData = reactive({
-        id: '',
-        end: '',
-        start: '',
-        old_amount: '',
-        newPay: '',
-        differencePay: '',
-        total_amount: '',
-        new_time: '',
-    });
-
-    function handleSelectServiceToEdit(service) {
-        toggleModal(visible);
-        Object.assign(serviceData, {
-            id: service.id,
-            end: service.end,
-            start: service.start,
-            old_amount: service.total_mount,
-            newPay: '',
-            differencePay: '',
-            total_amount: '',
-            new_time: service.end,
-        });
-
-        console.log(serviceData, visible.value);
-    }
-
-    const calculateChanges = (start, end) => {
-        newPay.value = calculateTotalHours(start, end);
-        console.log(newPay.value);
-    }
-
-    onMounted(async () => {
-        const { data } = await APIReservations.getReservations();
-        reservations.value = data.data;
-    })
 
     async function getStats() {
         try {
@@ -98,6 +71,31 @@ export const usePcServices = defineStore("PcServices", () => {
         }
     }
 
+
+    //  functions to edit a reservation
+    function updateData() {
+        if (oldReservation.value.end !== original.value.end) {
+            rent.value.push(oldReservation.value);
+            oldReservation.value.total_hours = totalHours.value;
+            oldReservation.value.total_amount = totalAmount.value;
+            differencePay.value = formatCurrency(oldReservation.value.total_amount - original.value.total_amount);
+        }
+    }
+
+    async function updateReservation(id, format) {
+        try {
+            const response = await APIReservations.update(id, format);
+            return { success: true, message: response.data.message };
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    onMounted(async () => {
+        const { data } = await APIReservations.getReservations();
+        reservations.value = data.data;
+    })
+
     return {
         onCreateReservation,
         totalHours,
@@ -105,12 +103,15 @@ export const usePcServices = defineStore("PcServices", () => {
         rent,
         hour,
         reservation, // => Crear la reservacion
-        handleSelectServiceToEdit,
-        serviceData,
+        getStats,
+        updateData,
+        updateReservation,
+        oldReservation,
+        original,
         visible,
-        calculateChanges,
         reservations,
         stats,
         getStats,
+        differencePay
     }
 });

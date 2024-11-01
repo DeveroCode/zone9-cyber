@@ -3,7 +3,17 @@ import { usePcServices } from '@/stores/PcServices';
 import { formatCurrency, toggleModal } from '@/helpers';
 import { PencilSquareIcon, TrashIcon, EyeIcon } from '@heroicons/vue/24/outline';
 import EditReservationModal from '@/components/Modals/EditReservationModal.vue';
+import { ref } from 'vue';
 const reservations = usePcServices();
+
+const visible = ref(false);
+const identifier = ref(0);
+
+const handleViewModal = (service, id) => {
+    visible.value = !visible.value;
+    identifier.value = id;
+    reservations.onCreateReservation(service, id);
+};
 </script>
 
 <template>
@@ -25,13 +35,14 @@ const reservations = usePcServices();
                     <td class="px-4 py-3">{{ service.day_reservation }}</td>
                     <td class="px-4 py-3">{{ service.name }} {{ service.last_name }}</td>
                     <td class="px-4 py-3">{{ service.pc }}</td>
-                    <td class="px-4 py-3 text-right text-green-400 font-semibold">{{ formatCurrency(service.total_mount)
-                        }}</td>
+                    <td class="px-4 py-3 text-right text-green-400 font-semibold">{{
+                        formatCurrency(service.total_amount)
+                    }}</td>
                     <td class="px-4 py-3 text-right">{{ service.total_hours }} Hrs</td>
                     <td class="px-4 py-3">De {{ service.start }} Hasta {{ service.end }}</td>
                     <td class="px-4 py-3 text-center">
                         <button class="text-white font-medium py-1 px-3"
-                            @click="reservations.handleSelectServiceToEdit({ ...service })">
+                            @click="handleViewModal({ ...service }, service.id)">
                             <PencilSquareIcon class="w-5 h-5" />
                         </button>
                         <button class="text-white font-medium py-1 px-3">
@@ -46,5 +57,5 @@ const reservations = usePcServices();
         </table>
     </main>
 
-    <EditReservationModal :visible="reservations.visible" />
+    <EditReservationModal :visible="visible" :id="identifier" />
 </template>

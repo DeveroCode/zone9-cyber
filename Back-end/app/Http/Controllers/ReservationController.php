@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
+use Illuminate\Support\Facades\Log;
+use App\Http\Resources\StatsCollection;
 use App\Http\Requests\ReservationRequest;
 use App\Http\Resources\ReservationsCollection;
-use App\Http\Resources\StatsCollection;
-use App\Models\Reservation;
+use App\Http\Requests\UpdateReservationRequest;
 
 class ReservationController extends Controller
 {
@@ -16,10 +18,17 @@ class ReservationController extends Controller
         return new ReservationsCollection($reservations);
     }
 
-    public function show()
-    {
-        $reservations = Reservation::all();
-        return new StatsCollection($reservations);
+    public function update(UpdateReservationRequest $request , $id)
+    {   
+        $data = $request->validated();
+        $reservation = Reservation::findOrFail($id);
+
+        if($reservation){
+            $reservation->update($data);
+            return response()->json(['message' => "Reservacion actualizada con exito"], 200);
+        }else {
+            return response()->json(['message' => "Reservacion no encontrada"], 404);
+        }
     }
 
     public function store(ReservationRequest $request)
@@ -41,7 +50,9 @@ class ReservationController extends Controller
         return response()->json(['message' => "Reservacion creada con exito"], 201);
     }
 
-    public function create(){
-        // Add code
+    public function show()
+    {
+        $reservations = Reservation::all();
+        return new StatsCollection($reservations);
     }
 }

@@ -11,10 +11,10 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::get('/reservations', [ReservationController::class, 'index']);
     Route::get('/stats', [ReservationController::class, 'show']);
+    Route::post('/update-reservation/{id}', [ReservationController::class, 'update']);
 });
 
 Route::controller(ReservationController::class)->group(function () {
     Route::post('/create-reservation', 'store');
-    // Route::get('/stats', 'show');
 });
 Route::post('/auth/user', [AuthController::class, 'login']);
