@@ -25,6 +25,7 @@ class ReservationsResource extends JsonResource
             'end' => $this->end,
             'total_amount' => $this->total_amount,
             'day_reservation' => $this->created_at->format('d/m/Y'),
+            'loan' => $this->loan
         ];
     }
 }

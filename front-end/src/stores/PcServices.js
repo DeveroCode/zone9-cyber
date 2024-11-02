@@ -1,12 +1,12 @@
 import APIReservations from "@/services/APIReservations";
 import { defineStore } from "pinia";
-import { ref, onMounted, computed, reactive } from "vue";
+import { ref, onMounted, computed, inject } from "vue";
 import { convertToMilitaryTime, convertToTime, formatCurrency } from "@/helpers";
 
 export const usePcServices = defineStore("PcServices", () => {
     // Utilities
     const MAX_PRICE = 17;
-    const visible = ref(false);
+    const toast = inject("toast");
 
     // Variable to create, edit a reservations
     const hour = ref(0);
@@ -18,7 +18,7 @@ export const usePcServices = defineStore("PcServices", () => {
     const oldReservation = ref({});
     const differencePay = ref(0);
     const original = ref({});
-
+    const loan = ref(false);
 
     // Functions to create a new Reservation
     function onCreateReservation(reservation, id = null) {
@@ -36,9 +36,6 @@ export const usePcServices = defineStore("PcServices", () => {
         const hours = rent.value.reduce((total, service) => {
             const startTime = convertToMilitaryTime(service.start);
             const endTime = convertToMilitaryTime(service.end);
-
-            console.log(`Hora inicio: ${service.start}, Hora fin: ${service.end}`);
-
             return total + (endTime - startTime);
         }, 0);
         hour.value = hours;
@@ -59,12 +56,10 @@ export const usePcServices = defineStore("PcServices", () => {
         }
     }
 
-
     async function getStats() {
         try {
             const { data } = await APIReservations.getStats();
             stats.value = data.data;
-            console.log('desde pc service', stats.value);
         } catch (error) {
             console.log(error);
         }
@@ -83,8 +78,7 @@ export const usePcServices = defineStore("PcServices", () => {
 
     async function updateReservation(id, format) {
         try {
-            const response = await APIReservations.update(id, format);
-            return { success: true, message: response.data.message };
+            await APIReservations.update(id, format);
         } catch (error) {
             return { succes: false, messae: response.data.messae }
         }
@@ -92,6 +86,7 @@ export const usePcServices = defineStore("PcServices", () => {
 
     onMounted(async () => {
         const { data } = await APIReservations.getReservations();
+        console.log(data.data);
         reservations.value = data.data;
     })
 
@@ -102,6 +97,25 @@ export const usePcServices = defineStore("PcServices", () => {
             return { success: true, message: response.data.message };
         } catch (error) {
             return { success: false, message: error.response.data.message };
+        }
+    }
+
+
+    // Confrim reservation
+    async function ConfirmReservation(id) {
+        try {
+            const formatData = { 'loan': 1 };
+            const response = await APIReservations.confirmR(id, formatData);
+        } catch (error) {
+            console.log(error.response.data.message);
+        }
+    }
+    async function NotConfirmReservation(id) {
+        try {
+            const formatData = { 'loan': 0 };
+            const response = await APIReservations.confirmR(id, formatData);
+        } catch (error) {
+            console.log(error.response.data.message);
         }
     }
 
@@ -120,6 +134,8 @@ export const usePcServices = defineStore("PcServices", () => {
         original,
         reservations,
         differencePay,
-        deleteReservation
+        deleteReservation,
+        ConfirmReservation,
+        NotConfirmReservation
     }
 });

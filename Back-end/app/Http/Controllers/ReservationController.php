@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 use App\Http\Resources\StatsCollection;
 use App\Http\Requests\ReservationRequest;
 use App\Http\Resources\ReservationsCollection;
@@ -65,5 +65,17 @@ class ReservationController extends Controller
         }else {
             return response()->json(['message' => "Reservación no encontrada"], 404);
         }   
+    }
+
+    public function loanUpdate($id, Request $request){
+        $reservation = Reservation::findOrFail($id);
+
+        if($reservation){
+            $data = $request->all();
+            $reservation->update($data);
+            return response()->json(['message' => "Reservación actualizada con exito"], 200);
+        }else{
+            return response()->json(['message' => "Reservación no encontrada"], 404);
+        }
     }
 }

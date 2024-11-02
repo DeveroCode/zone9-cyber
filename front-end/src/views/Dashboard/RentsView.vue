@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import { usePcServices } from '@/stores/PcServices';
-import { formatCurrency, toggleModal } from '@/helpers';
-import { PencilSquareIcon, TrashIcon, EyeIcon } from '@heroicons/vue/24/outline';
+import { formatCurrency } from '@/helpers';
+import { PencilSquareIcon, TrashIcon, EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline';
 import EditReservationModal from '@/components/Modals/EditReservationModal.vue';
 import DeleteModal from '@/components/Modals/DeleteModal.vue';
 
@@ -44,7 +44,7 @@ const handleDeleteModal = (id) => {
                     <td class="px-4 py-3">{{ service.pc }}</td>
                     <td class="px-4 py-3 text-right text-green-400 font-semibold">{{
                         formatCurrency(service.total_amount)
-                        }}</td>
+                    }}</td>
                     <td class="px-4 py-3 text-right">{{ service.total_hours }} Hrs</td>
                     <td class="px-4 py-3">De {{ service.start }} Hasta {{ service.end }}</td>
                     <td class="px-4 py-3 text-center">
@@ -55,7 +55,12 @@ const handleDeleteModal = (id) => {
                         <button class="text-white font-medium py-1 px-3" @click="handleDeleteModal(service.id)">
                             <TrashIcon class="w-5 h-5" />
                         </button>
-                        <button class="text-white font-medium py-1 px-3">
+                        <button class="text-white font-medium py-1 px-3"
+                            @click="reservations.NotConfirmReservation(service.id)" v-if="service.loan === 1">
+                            <EyeSlashIcon class="w-5 h-5" />
+                        </button>
+                        <button class="text-white font-medium py-1 px-3"
+                            @click="reservations.ConfirmReservation(service.id)" v-else>
                             <EyeIcon class="w-5 h-5" />
                         </button>
                     </td>
@@ -64,6 +69,6 @@ const handleDeleteModal = (id) => {
         </table>
     </main>
 
-    <EditReservationModal :visible="visible" :id="identifier" />
+    <EditReservationModal :visible="edit" :id="identifier" />
     <DeleteModal :id="identifier" :visible="remove" :deleteReservation="reservations.deleteReservation" />
 </template>

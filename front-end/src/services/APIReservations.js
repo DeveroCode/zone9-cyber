@@ -15,5 +15,8 @@ export default {
     },
     delete(id) {
         return authorization('delete', `/delete-reservation/${id}`);
+    },
+    confirmR(id, data) {
+        return authorization('post', `/reservation-loan-update/${id}`, data);
     }
 }

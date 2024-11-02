@@ -19,5 +19,6 @@ class Reservation extends Model
         'end',
         'total_hours',
         'total_amount',
+        'loan'
     ];
 }
