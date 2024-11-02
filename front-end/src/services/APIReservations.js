@@ -12,5 +12,8 @@ export default {
     },
     update(id, data) {
         return authorization('post', `/update-reservation/${id}`, data);
+    },
+    delete(id) {
+        return authorization('delete', `/delete-reservation/${id}`);
     }
 }

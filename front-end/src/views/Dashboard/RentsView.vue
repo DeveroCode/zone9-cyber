@@ -1,18 +1,25 @@
 <script setup>
+import { ref } from 'vue';
 import { usePcServices } from '@/stores/PcServices';
 import { formatCurrency, toggleModal } from '@/helpers';
 import { PencilSquareIcon, TrashIcon, EyeIcon } from '@heroicons/vue/24/outline';
 import EditReservationModal from '@/components/Modals/EditReservationModal.vue';
-import { ref } from 'vue';
-const reservations = usePcServices();
+import DeleteModal from '@/components/Modals/DeleteModal.vue';
 
-const visible = ref(false);
+const reservations = usePcServices();
+const edit = ref(false);
+const remove = ref(false);
 const identifier = ref(0);
 
 const handleViewModal = (service, id) => {
-    visible.value = !visible.value;
     identifier.value = id;
+    edit.value = !edit.value;
     reservations.onCreateReservation(service, id);
+};
+
+const handleDeleteModal = (id) => {
+    identifier.value = id;
+    remove.value = !remove.value;
 };
 </script>
 
@@ -37,7 +44,7 @@ const handleViewModal = (service, id) => {
                     <td class="px-4 py-3">{{ service.pc }}</td>
                     <td class="px-4 py-3 text-right text-green-400 font-semibold">{{
                         formatCurrency(service.total_amount)
-                    }}</td>
+                        }}</td>
                     <td class="px-4 py-3 text-right">{{ service.total_hours }} Hrs</td>
                     <td class="px-4 py-3">De {{ service.start }} Hasta {{ service.end }}</td>
                     <td class="px-4 py-3 text-center">
@@ -45,7 +52,7 @@ const handleViewModal = (service, id) => {
                             @click="handleViewModal({ ...service }, service.id)">
                             <PencilSquareIcon class="w-5 h-5" />
                         </button>
-                        <button class="text-white font-medium py-1 px-3">
+                        <button class="text-white font-medium py-1 px-3" @click="handleDeleteModal(service.id)">
                             <TrashIcon class="w-5 h-5" />
                         </button>
                         <button class="text-white font-medium py-1 px-3">
@@ -58,4 +65,5 @@ const handleViewModal = (service, id) => {
     </main>
 
     <EditReservationModal :visible="visible" :id="identifier" />
+    <DeleteModal :id="identifier" :visible="remove" :deleteReservation="reservations.deleteReservation" />
 </template>

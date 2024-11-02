@@ -25,9 +25,9 @@ class ReservationController extends Controller
 
         if($reservation){
             $reservation->update($data);
-            return response()->json(['message' => "Reservacion actualizada con exito"], 200);
+            return response()->json(['message' => "Reservación actualizada con exito"], 200);
         }else {
-            return response()->json(['message' => "Reservacion no encontrada"], 404);
+            return response()->json(['message' => "Reservación no encontrada"], 404);
         }
     }
 
@@ -47,12 +47,23 @@ class ReservationController extends Controller
             'total_amount' => $data['total_amount'],
         ]);
 
-        return response()->json(['message' => "Reservacion creada con exito"], 201);
+        return response()->json(['message' => "Reservación creada con exito"], 201);
     }
 
     public function show()
     {
         $reservations = Reservation::all();
         return new StatsCollection($reservations);
+    }
+
+    public function destroy($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        if($reservation){
+            $reservation->delete();
+            return response()->json(['message' => "Reservación eliminada con exito"], 200);
+        }else {
+            return response()->json(['message' => "Reservación no encontrada"], 404);
+        }   
     }
 }

@@ -13,7 +13,6 @@ export const usePcServices = defineStore("PcServices", () => {
     const reservations = ref([]);
     const rent = ref([]);
     const stats = ref({});
-    const updateTotal = ref(0);
 
     // Variable to edit a reservation
     const oldReservation = ref({});
@@ -87,7 +86,7 @@ export const usePcServices = defineStore("PcServices", () => {
             const response = await APIReservations.update(id, format);
             return { success: true, message: response.data.message };
         } catch (error) {
-            console.log(error.message);
+            return { succes: false, messae: response.data.messae }
         }
     }
 
@@ -95,6 +94,16 @@ export const usePcServices = defineStore("PcServices", () => {
         const { data } = await APIReservations.getReservations();
         reservations.value = data.data;
     })
+
+    // Delete reservations
+    const deleteReservation = async (id) => {
+        try {
+            const response = await APIReservations.delete(id);
+            return { success: true, message: response.data.message };
+        } catch (error) {
+            return { success: false, message: error.response.data.message };
+        }
+    }
 
     return {
         onCreateReservation,
@@ -104,14 +113,13 @@ export const usePcServices = defineStore("PcServices", () => {
         hour,
         reservation, // => Crear la reservacion
         getStats,
+        stats,
         updateData,
         updateReservation,
         oldReservation,
         original,
-        visible,
         reservations,
-        stats,
-        getStats,
-        differencePay
+        differencePay,
+        deleteReservation
     }
 });

@@ -11,7 +11,6 @@ import CardComponent from '@/components/Cards/CardComponent.vue';
 
 const services = usePcServices();
 
-
 // Dictonary for icons
 const iconMap = {
     "Ganancias Mensuales": CurrencyDollarIcon,

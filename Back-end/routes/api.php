@@ -12,6 +12,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/reservations', [ReservationController::class, 'index']);
     Route::get('/stats', [ReservationController::class, 'show']);
     Route::post('/update-reservation/{id}', [ReservationController::class, 'update']);
+    Route::delete('/delete-reservation/{id}', [ReservationController::class, 'destroy']);
 });
 
 Route::controller(ReservationController::class)->group(function () {
