@@ -33,7 +33,9 @@ class UpdateReservationRequest extends FormRequest
         return [
             'total_amount.required' => 'El campo total a pagar es obligatorio',
             'total_hours.required' => 'El campo horas es obligatorio',
-            'end.required' => 'El campo fecha es obligatorio',
+            'end.required' => 'El tiempo de finalización es obligatorio',
+            'end.after_or_equal' => 'La hora de fin debe ser posterior a la hora de inicio.',
+            'end.before_or_equal' => 'La hora de fin debe ser antes o igual a las 18:00.',
         ];
     }
 }

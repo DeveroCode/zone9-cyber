@@ -43,7 +43,11 @@ class ReservationRequest extends FormRequest
             'pc.required' => 'El campo pc es obligatorio',
             'phone.required' => 'El campo telefono es obligatorio',
             'start.required' => 'El campo fecha es obligatorio',
-            'end.required' => 'El campo fecha es obligatorio',
+            'start.after_or_equal' => 'La hora de inicio debe ser a partir de las 09:00.',
+            'start.before_or_equal' => 'La hora de inicio debe ser antes de las 18:00.',
+            'end.required' => 'El tiempo de finalización es obligatorio',
+            'end.after_or_equal' => 'La hora de fin debe ser posterior a la hora de inicio.',
+            'end.before_or_equal' => 'La hora de fin debe ser antes o igual a las 18:00.',
             'total_hours.required' => 'El campo horas es obligatorio',
             'total_amount.required' => 'El campo monto es obligatorio',
         ];

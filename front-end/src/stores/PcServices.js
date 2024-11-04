@@ -18,28 +18,26 @@ export const usePcServices = defineStore("PcServices", () => {
     const oldReservation = ref({});
     const differencePay = ref(0);
     const original = ref({});
-    const loan = ref(false);
+    const isLoading = ref(false);
 
     // Functions to create a new Reservation
     function onCreateReservation(reservation, id = null) {
         if (!id) {
-            rent.value.push({ ...reservation });
+            oldReservation.value = reservation;
         } else {
             oldReservation.value = reservation;
-            original.value = reservations.value.find(r => r.id === id);;
-            updateReservation();
+            original.value = reservations.value.find(r => r.id === id);
         }
 
     }
 
     const totalHours = computed(() => {
-        const hours = rent.value.reduce((total, service) => {
-            const startTime = convertToMilitaryTime(service.start);
-            const endTime = convertToMilitaryTime(service.end);
-            return total + (endTime - startTime);
-        }, 0);
-        hour.value = hours;
-        return convertToTime(hours)
+        const startTime = convertToMilitaryTime(oldReservation.value.start);
+        const endTime = convertToMilitaryTime(oldReservation.value.end);
+        const total = endTime - startTime;
+
+        hour.value = total;
+        return convertToTime(total);
     });
 
     const totalAmount = computed(() => {
@@ -50,9 +48,9 @@ export const usePcServices = defineStore("PcServices", () => {
     async function reservation(data) {
         try {
             const response = APIReservations.create(data);
-            return { succes: true, message: response.data.message };
+            return { success: true, message: response.data.message };
         } catch (error) {
-            console.log(error);
+            return { success: false, message: 'Reservacion fallida' };
         }
     }
 
@@ -65,10 +63,9 @@ export const usePcServices = defineStore("PcServices", () => {
         }
     }
 
-
-    //  functions to edit a reservation
     function updateData() {
         if (oldReservation.value.end !== original.value.end) {
+            // Actualiza la reserva
             rent.value.push(oldReservation.value);
             oldReservation.value.total_hours = totalHours.value;
             oldReservation.value.total_amount = totalAmount.value;
@@ -79,21 +76,34 @@ export const usePcServices = defineStore("PcServices", () => {
     async function updateReservation(id, format) {
         try {
             await APIReservations.update(id, format);
+            await getReservationsFn();
+            return { success: true, message: 'Reservacion actualizada con exito' };
         } catch (error) {
-            return { succes: false, messae: response.data.messae }
+            return { success: false, message: error.response.data.message };
         }
     }
 
     onMounted(async () => {
-        const { data } = await APIReservations.getReservations();
-        console.log(data.data);
-        reservations.value = data.data;
+        try {
+            await getReservationsFn();
+        } catch (error) {
+            console.log(error);
+        } finally {
+            // await getStats();
+            isLoading.value = false;
+        }
     })
+
+    async function getReservationsFn() {
+        const { data } = await APIReservations.getReservations();
+        reservations.value = data.data;
+    }
 
     // Delete reservations
     const deleteReservation = async (id) => {
         try {
             const response = await APIReservations.delete(id);
+            await getReservationsFn();
             return { success: true, message: response.data.message };
         } catch (error) {
             return { success: false, message: error.response.data.message };
@@ -103,19 +113,27 @@ export const usePcServices = defineStore("PcServices", () => {
 
     // Confrim reservation
     async function ConfirmReservation(id) {
+        const formatData = { 'loan': 1 };
         try {
-            const formatData = { 'loan': 1 };
-            const response = await APIReservations.confirmR(id, formatData);
+            isLoading.value = true;
+            await APIReservations.confirmR(id, formatData);
+            await getReservationsFn();
         } catch (error) {
             console.log(error.response.data.message);
+        } finally {
+            isLoading.value = false
         }
     }
     async function NotConfirmReservation(id) {
+        const formatData = { 'loan': 0 };
         try {
-            const formatData = { 'loan': 0 };
-            const response = await APIReservations.confirmR(id, formatData);
+            isLoading.value = true;
+            await APIReservations.confirmR(id, formatData);
+            await getReservationsFn();
         } catch (error) {
             console.log(error.response.data.message);
+        } finally {
+            isLoading.value = false;
         }
     }
 
@@ -136,6 +154,7 @@ export const usePcServices = defineStore("PcServices", () => {
         differencePay,
         deleteReservation,
         ConfirmReservation,
-        NotConfirmReservation
+        NotConfirmReservation,
+        isLoading
     }
 });

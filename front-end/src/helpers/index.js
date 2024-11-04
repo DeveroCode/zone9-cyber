@@ -12,6 +12,9 @@ export const toggleModal = (visible) => {
 };
 
 export const convertToMilitaryTime = timeString => {
+    if (!timeString) {
+        return 0;
+    }
     const [hours, minutes] = timeString.split(':');
 
     const hora = parseInt(hours, 10);

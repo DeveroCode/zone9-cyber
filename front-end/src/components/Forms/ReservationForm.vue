@@ -20,16 +20,13 @@ const handleSubmit = async ({ ...formData }) => {
     user.value = formData;
     folio.value = generateFolio(formData.name, formData.last_name, formData.pc);
     services.onCreateReservation({ ...formData });
-    try {
-        await nextTick();
-        const result = services.reservation({ ...formData, folio: folio.value, total_hours: services.totalHours, total_amount: services.totalAmount });
-        handleViewModal();
-        if (result.status) {
-            toast.success(result.response.message, { duration: 2000 });
-        }
-    } catch (error) {
-        console.log(error.message);
-        toast.error('Error al realizar la reserva, por favor intente más tarde');
+    await nextTick();
+    const response = await services.reservation({ ...formData, folio: folio.value, total_hours: services.totalHours, total_amount: services.totalAmount });
+    handleViewModal();
+    if (response.success) {
+        toast.success(response.response.message, { duration: 2000 });
+    } else {
+        toast.error(response.response.message, { duration: 2000 });
     }
 };
 </script>
