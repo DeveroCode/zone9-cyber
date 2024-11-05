@@ -89,7 +89,7 @@ export const usePcServices = defineStore("PcServices", () => {
         } catch (error) {
             console.log(error);
         } finally {
-            // await getStats();
+            await getStats();
             isLoading.value = false;
         }
     })
@@ -110,7 +110,6 @@ export const usePcServices = defineStore("PcServices", () => {
         }
     }
 
-
     // Confrim reservation
     async function ConfirmReservation(id) {
         const formatData = { 'loan': 1 };
@@ -124,6 +123,19 @@ export const usePcServices = defineStore("PcServices", () => {
             isLoading.value = false
         }
     }
+
+    const confirmedReservations = computed(() => {
+        return reservations.value.filter(reservation => reservation.loan === 1);
+    });
+
+    const totalAmountConfirmed = computed(() => {
+        return confirmedReservations.value.reduce((total, reservation) => total + reservation.total_hours, 0);
+    });
+
+    const totalConfirmed = computed(() => {
+        return confirmedReservations.value.length
+    });
+
     async function NotConfirmReservation(id) {
         const formatData = { 'loan': 0 };
         try {
@@ -154,6 +166,9 @@ export const usePcServices = defineStore("PcServices", () => {
         differencePay,
         deleteReservation,
         ConfirmReservation,
+        confirmedReservations,
+        totalAmountConfirmed,
+        totalConfirmed,
         NotConfirmReservation,
         isLoading
     }

@@ -27,6 +27,7 @@ class StatsResource extends JsonResource
             'ganancias_diarias' => 'Ganancias Diarias',
             'rentas_mensuales' => 'Rentas Mensuales',
             'ganancias_totales' => 'Ganancias Netas',
+            'ganancias_reales' => 'Ganancias Reales',
             'percentage' => 'Porcentajes',
         ];
 

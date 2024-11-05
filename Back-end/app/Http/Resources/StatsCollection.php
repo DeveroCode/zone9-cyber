@@ -29,8 +29,10 @@ class StatsCollection extends ResourceCollection
         // Calculate the percentage
         // Percentage amounth
         $currentMonthEarnings = $this->monthlyIncomes($startOfMonth, $endOfMonth);
+        $totalEarningsTrue = $this->totalEarningsMonth($startOfMonth, $endOfMonth);
         $previousMonthEarnings = $this->monthlyIncomes($startOfpreviousMonth, $endOfpreviousMonth);
 
+        $realPercentageMonth = $this->highOrLow($totalEarningsTrue, $previousMonthEarnings);
         $currentMonthPercentage = $this->highOrLow($currentMonthEarnings, $previousMonthEarnings);
 
         // Current daily
@@ -67,6 +69,10 @@ class StatsCollection extends ResourceCollection
                 'value' => $realProfitEarnings,
                 'percentage' => $realProfitPercentage, 
             ],
+            'gananacias_reales' => [
+                'value' => $totalEarningsTrue,
+                'percentage' => $realPercentageMonth,
+            ]
         ];
         
 
@@ -110,5 +116,10 @@ class StatsCollection extends ResourceCollection
     private function yesterdayEarnings($day = null)
     {
         return Reservation::whereDate('created_at', $day)->where('loan', true)->sum('total_amount');
+    }
+
+    private function totalEarningsMonth($startOfMonth, $endOfMonth)
+    {
+        return Reservation::whereBetween('created_at', [$startOfMonth, $endOfMonth])->where('loan', true)->sum('total_amount');
     }
 }
