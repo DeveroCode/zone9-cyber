@@ -56,8 +56,8 @@ const perHours = computed(() => {
             <QuestionMarkCircleIcon class="w-7 h-7 text-primary" />
         </div>
         <p class="font-bold mt-2 text-3xl block">
-            {{ perHours }}
+            {{ formatCurrency(perHours) }}
         </p>
-        <p class="text-xs text-gray-400 mt-3">Horas totales de las reservas confirmadas durante el mes</p>
+        <p class="text-xs text-gray-400 mt-3">Ganancia estimada por hora</p>
     </div>
 </template>

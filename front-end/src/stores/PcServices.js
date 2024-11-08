@@ -136,6 +136,14 @@ export const usePcServices = defineStore("PcServices", () => {
         return confirmedReservations.value.length
     });
 
+    const NotConfirmed = computed(() => { return reservations.value.filter(reservation => reservation.loan === 0) });
+    const totalNotConfirmed = computed(() => { return NotConfirmed.value.reduce((total, reservation) => total + reservation.total_amount, 0) });
+    const totalNotConfirmedCount = computed(() => { return NotConfirmed.value.length });
+
+    const ExpensesHours = computed(() => {
+        return NotConfirmed.value.reduce((total, reservation) => total + reservation.total_hours, 0);
+    });
+
     async function NotConfirmReservation(id) {
         const formatData = { 'loan': 0 };
         try {
@@ -169,7 +177,11 @@ export const usePcServices = defineStore("PcServices", () => {
         confirmedReservations,
         totalAmountConfirmed,
         totalConfirmed,
+        totalNotConfirmed,
         NotConfirmReservation,
+        NotConfirmed,
+        totalNotConfirmedCount,
+        ExpensesHours,
         isLoading
     }
 });

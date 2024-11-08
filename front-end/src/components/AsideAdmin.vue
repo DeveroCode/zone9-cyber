@@ -13,7 +13,7 @@ import AsideLinks from './Links and Buttons/AsideLinks.vue';
             <AsideLinks to="dashboard" :icon="HomeIcon">Resumen</AsideLinks>
             <AsideLinks to="reservations" :icon="TicketIcon">Reservas</AsideLinks>
             <AsideLinks :icon="UserPlusIcon">Cuentas</AsideLinks>
-            <AsideLinks :icon="ArrowTrendingDownIcon">Gastos</AsideLinks>
+            <AsideLinks to="expenses" :icon="ArrowTrendingDownIcon">Gastos</AsideLinks>
             <AsideLinks to="earnings" :icon="ArrowTrendingUpIcon">Ganancias</AsideLinks>
         </nav>
     </aside>

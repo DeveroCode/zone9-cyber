@@ -39,6 +39,9 @@ export const setHeaderTitle = (title) => {
         case 'earnings':
             return 'Visualizador de Ganancias Mensuales';
             break;
+        case 'expenses':
+            return 'Visualizador de Gastos Mensuales'
+            break;
         default:
             return 'Bienvenido al panel de administración de Zona9';
             break;
