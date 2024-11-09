@@ -7,7 +7,7 @@ import AsideLinks from './Links and Buttons/AsideLinks.vue';
 <template>
     <aside
         class="bg-white border-r-[1px] dark:border-primary-dash min-h-screen w-1/5 shadow-lg p-10 dark:bg-primary-dash">
-        <h2 class="text-3xl font-semibold text-secondary dark:text-white overflow-hidden">Administración</h2>
+        <h2 class="text-2xl font-semibold text-secondary dark:text-white overflow-hidden">Administración</h2>
 
         <nav class="text-secondary dark:text-white mt-10 space-y-5 text-lg font-semi-bold">
             <AsideLinks to="dashboard" :icon="HomeIcon">Resumen</AsideLinks>

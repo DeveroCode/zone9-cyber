@@ -51,7 +51,7 @@ const handleOpenCards = () => {
 
     <main class="mt-10" :class="table ? 'hidden' : ''">
         <table class="min-w-full table-auto rounded-xl overflow-hidden shadow-lg">
-            <thead class="bg-gray-700 text-gray-300 uppercase text-sm">
+            <thead class="dark:bg-gray-700 dark:text-gray-300 text-secondary uppercase text-sm">
                 <tr>
                     <th class="px-4 py-3 text-left">Fecha</th>
                     <th class="px-4 py-3 text-left w-1/4">Nombre</th>
@@ -61,14 +61,15 @@ const handleOpenCards = () => {
                     <th class="px-4 py-3 text-left">Servicio</th>
                 </tr>
             </thead>
-            <tbody class="bg-gray-800 text-gray-100">
-                <tr class="hover:bg-gray-600" v-for="service in services.confirmedReservations" :key="service.id">
+            <tbody class="dark:bg-gray-800 dark:text-gray-100 text-secondary">
+                <tr class="dark:hover:bg-gray-600 hover:bg-gray-100" v-for="service in services.confirmedReservations"
+                    :key="service.id">
                     <td class="px-4 py-3">{{ service.day_reservation }}</td>
                     <td class="px-4 py-3">{{ service.name }} {{ service.last_name }}</td>
                     <td class="px-4 py-3">{{ service.pc }}</td>
                     <td class="px-4 py-3 text-right text-green-400 font-semibold">{{
                         formatCurrency(service.total_amount)
-                    }}</td>
+                        }}</td>
                     <td class="px-4 py-3 text-right">{{ service.total_hours }} Hrs</td>
                     <td class="px-4 py-3">De {{ service.start }} Hasta {{ service.end }}</td>
                 </tr>

@@ -14,7 +14,7 @@ defineProps({
 
 <template>
     <span class="text-center cursor-pointer py-2 px-5"
-        :class="currentForm === activeForm ? 'bg-secondary shadow-md rounded-lg' : ''">
+        :class="currentForm === activeForm ? 'dark:bg-secondary shadow-md rounded-lg' : ''">
         <slot></slot>
     </span>
 </template>

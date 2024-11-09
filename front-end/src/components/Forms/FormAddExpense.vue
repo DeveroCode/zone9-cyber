@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div class="bg-white dark:bg-primary-dash rounded-md shadow-lg border p-10 border-secondary space-y-10">
+    <div class="bg-white dark:bg-primary-dash rounded-md shadow-lg dark:border p-10 dark:border-secondary space-y-10">
         <legend class="text-3xl font-semibold text-secondary dark:text-white">Registros de Gastos</legend>
         <FormKit type="form" :actions="false">
             <div class="flex gap-3 items-center">

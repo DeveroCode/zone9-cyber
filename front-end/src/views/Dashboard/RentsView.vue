@@ -26,7 +26,7 @@ const handleDeleteModal = (id) => {
 <template>
     <main class="mt-10">
         <table class="min-w-full table-auto rounded-xl overflow-hidden shadow-lg">
-            <thead class="bg-gray-700 text-gray-300 uppercase text-sm">
+            <thead class="dark:bg-gray-700 dark:text-gray-300 text-secondary uppercase text-sm">
                 <tr>
                     <th class="px-4 py-3 text-left">Fecha</th>
                     <th class="px-4 py-3 text-left">Nombre</th>
@@ -37,8 +37,9 @@ const handleDeleteModal = (id) => {
                     <th class="px-4 py-3 text-center">Acciones</th>
                 </tr>
             </thead>
-            <tbody class="bg-gray-800 text-gray-100">
-                <tr class="hover:bg-gray-600" v-for="service in reservations.reservations" :key="service.id">
+            <tbody class="dark:bg-gray-800 dark:text-gray-100 text-secondary">
+                <tr class="dark:hover:bg-gray-600 hover:bg-gray-100" v-for="service in reservations.reservations"
+                    :key="service.id">
                     <td class="px-4 py-3">{{ service.day_reservation }}</td>
                     <td class="px-4 py-3">{{ service.name }} {{ service.last_name }}</td>
                     <td class="px-4 py-3">{{ service.pc }}</td>
@@ -48,18 +49,18 @@ const handleDeleteModal = (id) => {
                     <td class="px-4 py-3 text-right">{{ service.total_hours }} Hrs</td>
                     <td class="px-4 py-3">De {{ service.start }} Hasta {{ service.end }}</td>
                     <td class="px-4 py-3 text-center">
-                        <button class="text-white font-medium py-1 px-3"
+                        <button class="dark:text-white font-medium py-1 px-3"
                             @click="handleViewModal({ ...service }, service.id)">
                             <PencilSquareIcon class="w-5 h-5" />
                         </button>
-                        <button class="text-white font-medium py-1 px-3" @click="handleDeleteModal(service.id)">
+                        <button class="text-red-800 font-medium py-1 px-3" @click="handleDeleteModal(service.id)">
                             <TrashIcon class="w-5 h-5" />
                         </button>
-                        <button class="text-white font-medium py-1 px-3"
+                        <button class="text-purple-600 font-medium py-1 px-3"
                             @click="reservations.NotConfirmReservation(service.id)" v-if="service.loan === 1">
                             <EyeSlashIcon class="w-5 h-5" />
                         </button>
-                        <button class="text-white font-medium py-1 px-3"
+                        <button class="text-purple-600 font-medium py-1 px-3"
                             @click="reservations.ConfirmReservation(service.id)" v-else>
                             <EyeIcon class="w-5 h-5" />
                         </button>
