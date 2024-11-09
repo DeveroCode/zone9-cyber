@@ -49,7 +49,7 @@ const handleAcceptAction = async () => {
             </div>
 
             <p class="text-gray-600 mt-10">Esta acción no se puede deshacer. Esto eliminará permanentemente el
-                ticket/reservación con folio: <span class="font-bold">CAR129O</span> y removera los datos asociados a
+                ticket/reservación y removera los datos asociados a
                 nuestros servicios.</p>
 
 
