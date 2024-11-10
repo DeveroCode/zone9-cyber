@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,11 +11,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/reservations', [ReservationController::class, 'index']);
     Route::get('/stats', [ReservationController::class, 'show']);
     Route::post('/update-reservation/{id}', [ReservationController::class, 'update']);
     Route::delete('/delete-reservation/{id}', [ReservationController::class, 'destroy']);
     Route::post('/reservation-loan-update/{id}', [ReservationController::class, 'loanUpdate']);
+
+
+    Route::get('/all-users', [UserController::class, 'index'])->middleware(IsAdmin::class);
 });
 
 Route::controller(ReservationController::class)->group(function () {
