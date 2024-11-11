@@ -20,8 +20,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Route::get('/user', [UserController::class, 'show']);
     Route::controller(UserController::class)->group(function () {
+        Route::post('/create-user', 'store');
         Route::get('/all-users', 'index');
         Route::post('/update-password/{id}', 'update');
+        Route::delete('/delete-user/{id}', 'destroy');
         Route::get('/search-users/{word}', 'show');
     })->middleware(IsAdmin::class);
 });

@@ -1,11 +1,21 @@
 <script setup>
-import { PencilSquareIcon, TrashIcon, EyeIcon, EyeSlashIcon, PlusIcon, MagnifyingGlassIcon, CheckIcon } from '@heroicons/vue/24/outline';
-defineProps({
+import { ref } from 'vue';
+import { defineProps } from 'vue';
+import { PencilSquareIcon, TrashIcon, CheckIcon } from '@heroicons/vue/24/outline';
+import DeleteUserModal from '@/components/Modals/DeleteUserModal.vue';
+
+const props = defineProps({
     users: {
         type: Array,
         required: true
+    },
+    deleteAccount: {
+        type: Function,
+        required: true
     }
 });
+const visible = ref(false);
+const idUser = ref(0);
 
 const updatePassword = async ({ ...formData }) => {
     const response = await services.updatePassword({ ...formData });
@@ -16,6 +26,11 @@ const updatePassword = async ({ ...formData }) => {
     } else {
         toast.error(response.message, { duration: 2000 });
     }
+};
+
+const handleViewModal = (id) => {
+    idUser.value = id;
+    visible.value = !visible.value;
 };
 </script>
 
@@ -52,10 +67,13 @@ const updatePassword = async ({ ...formData }) => {
                         <PencilSquareIcon class="w-5 h-5" />
                     </button>
                     <button class="text-red-800 font-medium py-1 px-3">
-                        <TrashIcon class="w-5 h-5" />
+                        <TrashIcon class="w-5 h-5" @click="handleViewModal(user.id)" />
                     </button>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <DeleteUserModal :visible="visible" :id="idUser" @update:visible="handleViewModal"
+        :deleteAccount="props.deleteAccount" />
 </template>

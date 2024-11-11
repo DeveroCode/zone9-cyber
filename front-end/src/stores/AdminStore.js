@@ -14,6 +14,16 @@ export const adminStore = defineStore('adminStore', () => {
         }
     });
 
+    async function createAccount(data) {
+        try {
+            const response = await APIAdmin.create(data);
+            return { success: true, message: response.data.message };
+            await getAllUser();
+        } catch (error) {
+            return { success: false, message: error.response.data.message };
+        }
+    }
+
     async function getAllUser() {
         const { data } = await APIAdmin.getUser();
         users.value = data.data;
@@ -39,10 +49,22 @@ export const adminStore = defineStore('adminStore', () => {
         }
     }
 
+    const deleteAccount = async (id) => {
+        try {
+            const response = await APIAdmin.delete(id);
+            await getAllUser();
+            return { success: true, message: response.data.message };
+        } catch (error) {
+            return { success: false, message: error.response.data.message };
+        }
+    }
+
     return {
+        createAccount,
         getAllUser,
         users,
         updatePassword,
-        searchEmployee
+        searchEmployee,
+        deleteAccount
     }
 });

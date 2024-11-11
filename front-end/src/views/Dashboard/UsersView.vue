@@ -1,25 +1,34 @@
 <script setup>
-import { ref, inject, watch } from 'vue';
+import { ref, inject, watch, onMounted } from 'vue';
 import { adminStore } from '@/stores/AdminStore';
 import { reset } from '@formkit/core'
 import { PlusIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
 import UserTable from '@/components/Tables/UsersTable.vue';
 import ErrorAlertModal from '@/components/Modals/ErrorAlertModal.vue';
+import CreateAccountModal from '@/components/Modals/CreateAccountModal.vue';
 
 const services = adminStore();
 const visible = ref(false);
 const toast = inject('toast');
 const word = ref('');
 
-const handleViewModal = () => {
-    visible.value = !visible.value
-};
+onMounted(async () => {
+    await services.getAllUser();
+});
 
 watch(word, async (newWord) => {
     if (newWord === '') {
         await services.getAllUser();
     }
 });
+
+const handleViewModal = () => {
+    visible.value = !visible.value
+};
+
+const handleCreateAccountModal = () => {
+    visible.value = !visible.value
+};
 
 const handleSubmitData = async () => {
     if (word.value === '') {
@@ -49,14 +58,15 @@ const handleSubmitData = async () => {
             </form>
             <button
                 class="text-white flex items-center justify-center gap-3 bg-secondary px-5 py-2 rounded-md my-4 border border-primary-dash dark:border-0"
-                type="submit">
+                @click="handleCreateAccountModal">
                 <PlusIcon class="w-5 h-5 mt-1" /> Agregar Empleado
             </button>
         </section>
 
-        <UserTable :users="services.users" />
+        <UserTable :users="services.users" :deleteAccount="services.deleteAccount" />
     </main>
 
 
     <ErrorAlertModal :visible="visible" @update:visible="handleViewModal" />
+    <CreateAccountModal :visible="visible" @update:visible="handleCreateAccountModal" />
 </template>

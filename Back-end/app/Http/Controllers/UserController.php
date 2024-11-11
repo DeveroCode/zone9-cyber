@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdatePassword;
-use App\Http\Requests\UpdatePasswordRequest;
-use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdatePassword;
+use App\Http\Resources\UserCollection;
+use App\Http\Requests\CreateAccountRequest;
+use App\Http\Requests\UpdatePasswordRequest;
+use Exception;
 
 class UserController extends Controller
 {
@@ -17,6 +19,26 @@ class UserController extends Controller
         return new UserCollection($user);
     }
     
+    public function store(CreateAccountRequest $request)
+    {
+        $data = $request->validated();
+
+        try{
+            User::create([
+                'name' => $data['name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'type_user' => $data['type_user'],
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+    
+            return response()->json(['message' => "Usuario creado con exito"], 201);    
+        }catch(Exception $e){
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+
     public function update(UpdatePasswordRequest $request, $id)
     {
         $data = $request->validated();
@@ -36,6 +58,18 @@ class UserController extends Controller
         
         if($user->isNotEmpty()){
             return new UserCollection($user);
+        }else{
+            return response()->json(['message' => "Usuario no encontrado"], 404);
+        }
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+
+        if($user){
+            $user->delete();
+            return response()->json(['message' => "Usuario eliminado con exito"], 200);
         }else{
             return response()->json(['message' => "Usuario no encontrado"], 404);
         }

@@ -1,6 +1,9 @@
 import { authorization } from "@/helpers/apiHelper";
 
 export default {
+    create(data) {
+        return authorization('post', '/create-user', data);
+    },
     getUser() {
         return authorization('get', '/all-users');
     },
@@ -9,5 +12,8 @@ export default {
     },
     getUserByWord(word) {
         return authorization('get', `/search-users/${word}`);
+    },
+    delete(id) {
+        return authorization('delete', `/delete-user/${id}`);
     }
 }
