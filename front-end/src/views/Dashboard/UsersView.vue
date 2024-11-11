@@ -29,7 +29,7 @@ const handleSubmitData = async () => {
         if (response.success) {
             toast.success(response.message, { duration: 2000 })
         } else {
-            toast.error(response.message, { duration: 2000 })
+            handleViewModal();
         }
     }
 };
