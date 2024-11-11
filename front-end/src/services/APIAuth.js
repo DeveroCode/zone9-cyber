@@ -6,5 +6,8 @@ export default {
     },
     dataUser() {
         return authorization('get', '/user');
+    },
+    logout() {
+        return authorization('post', '/logout');
     }
 }

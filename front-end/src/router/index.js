@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Main from '@/layouts/MainLayout.vue'
 import Dashboard from '@/layouts/DashboardLayout.vue'
-import { middlware } from '@/middleware';
+import { isAdminMiddleware, middlware } from '@/middleware';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -61,6 +61,12 @@ const router = createRouter({
           path: 'expenses',
           name: 'expenses',
           component: () => import('@/views/Dashboard/ExpensesView.vue')
+        },
+        {
+          path: 'users',
+          name: 'users',
+          component: () => import('@/views/Dashboard/UsersView.vue'),
+          meta: { requiresAdmin: true }
         }
       ]
     }
@@ -69,14 +75,22 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some(url => url.meta.requiresAuth);
+  const requiresAdmin = to.matched.some(url => url.meta.requiresAdmin);
 
-  if (requiresAuth) {
+  if (requiresAdmin) {
+    try {
+      await isAdminMiddleware(to, from, next);
+    } catch (error) {
+      next({ name: 'dashboard' });
+    }
+  } else if (requiresAuth) {
     try {
       await middlware(to, from, next);
     } catch (error) {
       next({ name: 'login' });
     }
-  } else {
+  }
+  else {
     next();
   }
 });

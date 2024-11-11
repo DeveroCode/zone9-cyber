@@ -19,6 +19,8 @@ class UsersSeed extends Seeder
             'type_user' => 'admin',
             'email' => 'admin@localhost.com',
             'password' => Hash::make('password'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'), 
         ]);
         DB::table('users')->insert([
             'name' => 'Carlos',
@@ -26,6 +28,26 @@ class UsersSeed extends Seeder
             'type_user' => 'empleado',
             'email' => 'empleado@localhost.com',
             'password' => Hash::make('password'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Alberto',
+            'last_name' => 'Martinez',
+            'type_user' => 'empleado',
+            'email' => 'empleado2@localhost.com',
+            'password' => Hash::make('password'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Rodrigo',
+            'last_name' => 'Gomez',
+            'type_user' => 'empleado',
+            'email' => 'empleado3@localhost.com',
+            'password' => Hash::make('password'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
     }
 }

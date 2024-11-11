@@ -18,8 +18,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/delete-reservation/{id}', [ReservationController::class, 'destroy']);
     Route::post('/reservation-loan-update/{id}', [ReservationController::class, 'loanUpdate']);
 
-
-    Route::get('/all-users', [UserController::class, 'index'])->middleware(IsAdmin::class);
+    // Route::get('/user', [UserController::class, 'show']);
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/all-users', 'index');
+        Route::post('/update-password/{id}', 'update');
+        Route::get('/search-users/{word}', 'show');
+    })->middleware(IsAdmin::class);
 });
 
 Route::controller(ReservationController::class)->group(function () {

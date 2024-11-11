@@ -29,8 +29,27 @@ export const authMethods = defineStore('authMethods', () => {
     }
 
 
+    async function logout() {
+        try {
+            const response = await APIAuth.logout();
+            localStorage.removeItem('token');
+            router.push({ name: 'login' });
+            return {
+                success: true,
+                message: response.data.message
+            }
+        } catch (error) {
+            return {
+                success: false,
+                message: error.response.data.message
+            }
+        }
+    }
+
+
     return {
         user,
         login,
+        logout
     }
 })
