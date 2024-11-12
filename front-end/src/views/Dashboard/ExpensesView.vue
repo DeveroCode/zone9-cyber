@@ -53,7 +53,8 @@ const handleTable = () => {
     </section>
 
     <main class="mt-10" :class="table ? 'hidden' : ''">
-        <table class="min-w-full table-auto rounded-xl overflow-hidden shadow-lg">
+        <table class="min-w-full table-auto rounded-xl overflow-hidden shadow-lg"
+            v-if="services.NotConfirmed.length > 0">
             <thead class="dark:bg-gray-700 dark:text-gray-300 text-secondary uppercase text-sm">
                 <tr>
                     <th class="px-4 py-3 text-left">Fecha</th>
@@ -78,6 +79,9 @@ const handleTable = () => {
                 </tr>
             </tbody>
         </table>
+
+        <p class="text-center text-gray-600 text-2xl font-semibold" v-else>Aún no hay gastos registrados en este mes,
+            por favor agrega un nuevo gasto</p>
     </main>
 
     <ExpensesModal :visible="visible" :totalNotConfirmed="services.totalNotConfirmed"

@@ -25,7 +25,8 @@ const handleDeleteModal = (id) => {
 
 <template>
     <main class="mt-10">
-        <table class="min-w-full table-auto rounded-xl overflow-hidden shadow-lg">
+        <table class="min-w-full table-auto rounded-xl overflow-hidden shadow-lg"
+            v-if="reservations.reservations.length > 0">
             <thead class="dark:bg-gray-700 dark:text-gray-300 text-secondary uppercase text-sm">
                 <tr>
                     <th class="px-4 py-3 text-left">Fecha</th>
@@ -68,6 +69,10 @@ const handleDeleteModal = (id) => {
                 </tr>
             </tbody>
         </table>
+
+        <p class="text-center text-gray-600 text-2xl font-semibold mt-32" v-else>Aún no hay reservaciones, por favor
+            verifica
+            tu conexión</p>
     </main>
 
     <EditReservationModal :visible="edit" :id="identifier" />

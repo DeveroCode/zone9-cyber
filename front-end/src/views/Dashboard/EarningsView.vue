@@ -50,7 +50,8 @@ const handleOpenCards = () => {
     </section>
 
     <main class="mt-10" :class="table ? 'hidden' : ''">
-        <table class="min-w-full table-auto rounded-xl overflow-hidden shadow-lg">
+        <table class="min-w-full table-auto rounded-xl overflow-hidden shadow-lg"
+            v-if="services.confirmedReservations.length > 0">
             <thead class="dark:bg-gray-700 dark:text-gray-300 text-secondary uppercase text-sm">
                 <tr>
                     <th class="px-4 py-3 text-left">Fecha</th>
@@ -69,12 +70,15 @@ const handleOpenCards = () => {
                     <td class="px-4 py-3">{{ service.pc }}</td>
                     <td class="px-4 py-3 text-right text-green-400 font-semibold">{{
                         formatCurrency(service.total_amount)
-                        }}</td>
+                    }}</td>
                     <td class="px-4 py-3 text-right">{{ service.total_hours }} Hrs</td>
                     <td class="px-4 py-3">De {{ service.start }} Hasta {{ service.end }}</td>
                 </tr>
             </tbody>
         </table>
+
+        <p class="text-center text-gray-600 text-2xl font-semibold" v-else>Aún no hay reservaciones, por favor verifica
+            tu conexión</p>
     </main>
     <EarningsModal :stat="services.stats" :visible="visible" @update:visible="visible = false"
         :totalConfirmed="services.totalConfirmed" />

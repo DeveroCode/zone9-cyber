@@ -64,7 +64,13 @@ const handleSubmitData = async () => {
 
         <UserTable :users="services.users" :deleteAccount="services.deleteAccount"
             :updatePassword="services.updatePassword" :getUserById="services.getUserById" :user="services.user"
-            :updateUser="services.updateUser" />
+            :updateUser="services.updateUser" v-if="services.users.length > 0" />
+
+
+        <p class="text-center text-gray-600 text-2xl font-semibold" v-else>Aún no hay empelado registrados, por favor
+            registra
+            a un nuevo
+            empleado</p>
     </main>
 
 
