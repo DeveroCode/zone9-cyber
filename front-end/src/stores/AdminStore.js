@@ -1,14 +1,20 @@
 import { defineStore } from "pinia";
 import { onMounted, ref } from 'vue';
 import APIAdmin from "@/services/APIAdmin";
+import { usePcServices } from "@/stores/PcServices";
 
 export const adminStore = defineStore('adminStore', () => {
     const users = ref({});
     const user = ref({});
+    const services = usePcServices();
 
     onMounted(async () => {
         try {
+            services.isLoading = true;
             await getAllUser();
+            setTimeout(() => {
+                services.isLoading = false;
+            }, 800);
         } catch (error) {
             console.log('Error al obtener los datos del usuario', error);
         }
