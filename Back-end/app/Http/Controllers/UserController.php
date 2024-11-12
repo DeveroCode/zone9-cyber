@@ -16,7 +16,7 @@ class UserController extends Controller
     
     public function index()
     {
-        $user = User::where('type_user', '!=', 'admin')->get();
+        $user = User::where('type_user', '!=', 'admin')->orderBy('id', 'DESC')->get();
         return new UserCollection($user);
     }
     

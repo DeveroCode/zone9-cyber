@@ -39,12 +39,13 @@ const updatePassword = async ({ ...formData }, id) => {
 
     if (response.success) {
         toast.success(response.message, { duration: 2000 });
-        reset(`update-password-${id}`);
+        resetForm(id);
     } else {
         toast.error(response.message, { duration: 2000 });
     }
 };
 
+const resetForm = (formId) => { reset(formId); };
 
 const editModalView = (data) => {
     editUser.value = data;
