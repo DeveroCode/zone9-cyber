@@ -1,8 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import { defineProps } from 'vue';
+import { reset } from '@formkit/core';
 import { PencilSquareIcon, TrashIcon, CheckIcon } from '@heroicons/vue/24/outline';
 import DeleteUserModal from '@/components/Modals/DeleteUserModal.vue';
+import CreateAccountModal from '@/components/Modals/CreateAccountModal.vue';
 
 const props = defineProps({
     users: {
@@ -12,21 +14,42 @@ const props = defineProps({
     deleteAccount: {
         type: Function,
         required: true
+    },
+    updatePassword: {
+        type: Function,
+        required: true
+    },
+    updateUser: {
+        type: Function,
+        required: true
+    },
+    user: {
+        type: Object,
+        required: true
     }
 });
-const visible = ref(false);
-const idUser = ref(0);
 
-const updatePassword = async ({ ...formData }) => {
-    const response = await services.updatePassword({ ...formData });
+const toast = inject('toast');
+const visible = ref(false);
+const isDelete = ref(false);
+const editUser = ref({});
+
+const updatePassword = async ({ ...formData }, id) => {
+    const response = await props.updatePassword({ ...formData });
 
     if (response.success) {
         toast.success(response.message, { duration: 2000 });
-        reset('update-password');
+        reset(`update-password-${id}`);
     } else {
         toast.error(response.message, { duration: 2000 });
     }
 };
+
+
+const editModalView = (data) => {
+    editUser.value = data;
+    isDelete.value = !isDelete.value;
+}
 
 const handleViewModal = (id) => {
     idUser.value = id;
@@ -51,7 +74,7 @@ const handleViewModal = (id) => {
                 <td class="px-4 py-3">{{ user.name }} {{ user.last_name }}</td>
                 <td class="px-4 py-3 capitalize">{{ user.type_user }}</td>
                 <td class="px-4 py-3 capitalize">
-                    <FormKit type="form" :actions="false" @submit="updatePassword" id="update-password">
+                    <FormKit type="form" :actions="false" @submit="updatePassword" :id="`update-password-${user.id}`">
                         <fieldset class="flex items-center justify-between">
                             <FormKit type="password" name="password" placeholder="Password"
                                 input-class="dark:border-secondary-dark dark:placeholder-gray-400 dark:bg-gray-600 w-64 focus:outline-none focus:ring-0 focus:border-gray-300" />
@@ -64,7 +87,7 @@ const handleViewModal = (id) => {
                 </td>
                 <td class="px-4 py-3 text-center">
                     <button class="dark:text-white font-medium py-1 px-3">
-                        <PencilSquareIcon class="w-5 h-5" />
+                        <PencilSquareIcon class="w-5 h-5" @click="editModalView({ ...user }, user.id)" />
                     </button>
                     <button class="text-red-800 font-medium py-1 px-3">
                         <TrashIcon class="w-5 h-5" @click="handleViewModal(user.id)" />
@@ -76,4 +99,7 @@ const handleViewModal = (id) => {
 
     <DeleteUserModal :visible="visible" :id="idUser" @update:visible="handleViewModal"
         :deleteAccount="props.deleteAccount" />
+
+    <CreateAccountModal :visible="isDelete" :editUser="editUser" @update:visible="editModalView"
+        :updateUser="props.updateUser" />
 </template>

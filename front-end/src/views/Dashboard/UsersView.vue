@@ -9,6 +9,7 @@ import CreateAccountModal from '@/components/Modals/CreateAccountModal.vue';
 
 const services = adminStore();
 const visible = ref(false);
+const addAccount = ref(false);
 const toast = inject('toast');
 const word = ref('');
 
@@ -25,11 +26,9 @@ watch(word, async (newWord) => {
 const handleViewModal = () => {
     visible.value = !visible.value
 };
-
 const handleCreateAccountModal = () => {
-    visible.value = !visible.value
+    addAccount.value = !addAccount.value
 };
-
 const handleSubmitData = async () => {
     if (word.value === '') {
         toast.error('Ingresa un nombre para buscar', { duration: 2000 })
@@ -63,10 +62,12 @@ const handleSubmitData = async () => {
             </button>
         </section>
 
-        <UserTable :users="services.users" :deleteAccount="services.deleteAccount" />
+        <UserTable :users="services.users" :deleteAccount="services.deleteAccount"
+            :updatePassword="services.updatePassword" :getUserById="services.getUserById" :user="services.user"
+            :updateUser="services.updateUser" />
     </main>
 
 
     <ErrorAlertModal :visible="visible" @update:visible="handleViewModal" />
-    <CreateAccountModal :visible="visible" @update:visible="handleCreateAccountModal" />
+    <CreateAccountModal :visible="addAccount" @update:visible="handleCreateAccountModal" />
 </template>

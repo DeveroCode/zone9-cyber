@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePassword;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\CreateAccountRequest;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Exception;
 
 class UserController extends Controller
@@ -39,7 +40,26 @@ class UserController extends Controller
         }
     }
 
-    public function update(UpdatePasswordRequest $request, $id)
+    public function update(UpdateUserRequest $request, $id)
+    {
+        $data = $request->validated();
+        $user = User::findOrFail($id);
+
+        if($user){
+            $user->update([
+                'name' => $data['name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'type_user' => $data['type_user'],
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
+            return response()->json(['message' => 'Usuario actualizado correctamente'], 200);
+        }else {
+            return response()->json(['message' => "Usuario no encontrado"], 404);
+        }
+    }
+
+    public function updatePassword(UpdatePasswordRequest $request, $id)
     {
         $data = $request->validated();
         $user = User::findOrFail($id);
