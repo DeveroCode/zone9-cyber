@@ -32,6 +32,7 @@ const props = defineProps({
 const toast = inject('toast');
 const visible = ref(false);
 const isDelete = ref(false);
+const idUser = ref(0);
 const editUser = ref({});
 
 const updatePassword = async ({ ...formData }, id) => {
@@ -90,8 +91,8 @@ const handleViewModal = (id) => {
                     <button class="dark:text-white font-medium py-1 px-3">
                         <PencilSquareIcon class="w-5 h-5" @click="editModalView({ ...user }, user.id)" />
                     </button>
-                    <button class="text-red-800 font-medium py-1 px-3">
-                        <TrashIcon class="w-5 h-5" @click="handleViewModal(user.id)" />
+                    <button class="text-red-800 font-medium py-1 px-3" @click="handleViewModal(user.id)">
+                        <TrashIcon class="w-5 h-5" />
                     </button>
                 </td>
             </tr>
@@ -99,7 +100,10 @@ const handleViewModal = (id) => {
     </table>
 
     <DeleteUserModal :visible="visible" :id="idUser" @update:visible="handleViewModal"
-        :deleteAccount="props.deleteAccount" />
+        :deleteAccount="props.deleteAccount">
+        Esta acción no se puede deshacer. Esto eliminará permanentemente el usuario seleccionado y removera los datos de
+        nuestra base de datos.
+    </DeleteUserModal>
 
     <CreateAccountModal :visible="isDelete" :editUser="editUser" @update:visible="editModalView"
         :updateUser="props.updateUser" />

@@ -45,7 +45,7 @@ const handleDeleteModal = (id) => {
                     <td class="px-4 py-3">{{ service.pc }}</td>
                     <td class="px-4 py-3 text-right text-green-400 font-semibold">{{
                         formatCurrency(service.total_amount)
-                    }}</td>
+                        }}</td>
                     <td class="px-4 py-3 text-right">{{ service.total_hours }} Hrs</td>
                     <td class="px-4 py-3">De {{ service.start }} Hasta {{ service.end }}</td>
                     <td class="px-4 py-3 text-center">
@@ -71,5 +71,9 @@ const handleDeleteModal = (id) => {
     </main>
 
     <EditReservationModal :visible="edit" :id="identifier" />
-    <DeleteModal :id="identifier" :visible="remove" :deleteReservation="reservations.deleteReservation" />
+    <DeleteModal :id="identifier" :visible="remove" :deleteReservation="reservations.deleteReservation">
+        Esta acción no se puede deshacer. Esto eliminará permanentemente el
+        ticket/reservación y removera los datos asociados a
+        nuestros servicios.
+    </DeleteModal>
 </template>

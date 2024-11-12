@@ -44,9 +44,8 @@ const deleteAccount = async () => {
                 <button class="text-secondary text-xl" @click="closeModal">x</button>
             </div>
 
-            <p class="text-gray-600 mt-10">Esta acción no se puede deshacer. Esto eliminará permanentemente el
-                ticket/reservación y removera los datos asociados a
-                nuestros servicios.</p>
+            <p class="text-gray-600 mt-10">¿Estás seguro de que deseas eliminar a este usuario? Esta acción no se puede
+                deshacer</p>
 
 
             <div class="flex justify-end mt-10 space-x-5">
