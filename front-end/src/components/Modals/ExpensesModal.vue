@@ -71,10 +71,6 @@ const closeModal = () => {
                         reservaciones en el mes</span>
                 </div>
             </div>
-
-            <p class="mt-4 text-sm text-gray-500">La perdida real representa el <span>{{ props.stats.length > 0 ?
-                props.stats[0].cuantity.percentage + '%' : 'N/A' }}</span> de la perdida total
-                esperada.</p>
         </Dialog>
     </div>
 </template>

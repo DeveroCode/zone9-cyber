@@ -14,6 +14,10 @@ const props = defineProps({
     totalConfirmed: {
         type: Number,
         required: true
+    },
+    totalAmountConfirmedCount: {
+        type: Number,
+        required: true
     }
 });
 const emit = defineEmits(['update:visible']);
@@ -51,18 +55,14 @@ const closeModal = () => {
                 <div class="rounded-md border border-gray-300 py-3 px-4 mt-4 w-1/2">
                     <h2 class="font-bold">Ganancia Real</h2>
                     <p class="font-bold mt-2 text-2xl block">
-                        {{ props.stat.length > 4 ? formatCurrency(props.stat[4].cuantity.value) : 'N/A' }}
+                        {{ formatCurrency(props.totalAmountConfirmedCount) }}
                     </p>
                     <span class="text-gray-400 text-xs line-clamp-4 mt-3">Ganancias estimadas por mes, se confirmaron {{
                         props.totalConfirmed
-                        }}
+                    }}
                         reservaciones en el mes</span>
                 </div>
             </div>
-
-            <p class="mt-4 text-sm text-gray-500">La ganancia real representa el <span>{{ props.stat.length > 4 ?
-                props.stat[4].cuantity.percentage + '%' : 'N/A' }}</span> de la ganancia total
-                esperada.</p>
         </Dialog>
     </div>
 </template>

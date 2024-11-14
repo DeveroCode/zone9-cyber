@@ -32,7 +32,7 @@ class StatsCollection extends ResourceCollection
         $totalEarningsTrue = $this->totalEarningsMonth($startOfMonth, $endOfMonth);
         $previousMonthEarnings = $this->monthlyIncomes($startOfpreviousMonth, $endOfpreviousMonth);
 
-        $realPercentageMonth = $this->highOrLow($totalEarningsTrue, $previousMonthEarnings);
+        // $realPercentageMonth = $this->highOrLow($totalEarningsTrue, $previousMonthEarnings);
         $currentMonthPercentage = $this->highOrLow($currentMonthEarnings, $previousMonthEarnings);
 
         // Current daily
@@ -68,10 +68,6 @@ class StatsCollection extends ResourceCollection
             'ganancias_totales' => [
                 'value' => $realProfitEarnings,
                 'percentage' => $realProfitPercentage, 
-            ],
-            'gananacias_reales' => [
-                'value' => $totalEarningsTrue,
-                'percentage' => $realPercentageMonth,
             ]
         ];
         

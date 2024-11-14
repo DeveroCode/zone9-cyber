@@ -1,8 +1,8 @@
 import { authorization } from "@/helpers/apiHelper";
 
 export default {
-    getReservations() {
-        return authorization('get', '/reservations');
+    getReservations(pageUrl = null) {
+        return authorization('get', pageUrl || '/reservations');
     },
     create(reservation) {
         return authorization('post', '/create-reservation', reservation);
@@ -18,5 +18,8 @@ export default {
     },
     confirmR(id, data) {
         return authorization('post', `/reservation-loan-update/${id}`, data);
+    },
+    search(word) {
+        return authorization('get', `/search-reservation/${word}`);
     }
 }

@@ -14,7 +14,7 @@ class ReservationController extends Controller
     //
     public function index()
     {
-        $reservations = Reservation::orderBy('created_at', 'desc')->get();
+        $reservations = Reservation::orderBy('created_at', 'desc')->paginate(6);
         return new ReservationsCollection($reservations);
     }
 
@@ -54,6 +54,17 @@ class ReservationController extends Controller
     {
         $reservations = Reservation::all();
         return new StatsCollection($reservations);
+    }
+
+    public function search($word)
+    {
+        $reservation = Reservation::where('folio', 'like', '%' . $word . '%')->paginate(1);
+
+        if($reservation->isNotEmpty()){
+            return new ReservationsCollection($reservation);
+        }else {
+            return response()->json(['message' => "Reservación no encontrada"], 404);
+        }
     }
 
     public function destroy($id)

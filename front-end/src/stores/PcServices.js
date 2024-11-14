@@ -1,6 +1,6 @@
 import APIReservations from "@/services/APIReservations";
 import { defineStore } from "pinia";
-import { ref, onMounted, computed, inject } from "vue";
+import { ref, onMounted, computed, inject, reactive } from "vue";
 import { convertToMilitaryTime, convertToTime, formatCurrency } from "@/helpers";
 
 export const usePcServices = defineStore("PcServices", () => {
@@ -19,6 +19,13 @@ export const usePcServices = defineStore("PcServices", () => {
     const differencePay = ref(0);
     const original = ref({});
     const isLoading = ref(false);
+
+    const pagination = reactive({
+        current_page: 1,
+        last_page: 1,
+        per_page: null,
+        total: null
+    });
 
     // Functions to create a new Reservation
     function onCreateReservation(reservation, id = null) {
@@ -94,9 +101,20 @@ export const usePcServices = defineStore("PcServices", () => {
         }
     })
 
-    async function getReservationsFn() {
-        const { data } = await APIReservations.getReservations();
-        reservations.value = data.data;
+    async function getReservationsFn(pageUrl = null) {
+        try {
+            const { data } = await APIReservations.getReservations(pageUrl);
+            reservations.value = data.data;
+            Object.assign(pagination, data.pagination);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function changePage(url) {
+        if (url) {
+            await getReservationsFn(url);
+        }
     }
 
     // Delete reservations
@@ -132,6 +150,8 @@ export const usePcServices = defineStore("PcServices", () => {
         return confirmedReservations.value.reduce((total, reservation) => total + reservation.total_hours, 0);
     });
 
+    const totalAmountConfirmedCount = computed(() => { return confirmedReservations.value.reduce((total, service) => total + service.total_amount, 0) });
+
     const totalConfirmed = computed(() => {
         return confirmedReservations.value.length
     });
@@ -157,8 +177,20 @@ export const usePcServices = defineStore("PcServices", () => {
         }
     }
 
+    async function searchReservation(word) {
+        try {
+            const { data } = await APIReservations.search(word);
+            reservations.value = data.data;
+            return { success: true, message: 'Reservacion encontrada con exito' };
+        } catch (error) {
+            return { success: false, message: error.response.data.message };
+        }
+    }
+
     return {
         onCreateReservation,
+        changePage,
+        pagination,
         totalHours,
         totalAmount,
         rent,
@@ -176,12 +208,14 @@ export const usePcServices = defineStore("PcServices", () => {
         ConfirmReservation,
         confirmedReservations,
         totalAmountConfirmed,
+        totalAmountConfirmedCount,
         totalConfirmed,
         totalNotConfirmed,
         NotConfirmReservation,
         NotConfirmed,
         totalNotConfirmedCount,
         ExpensesHours,
-        isLoading
+        isLoading,
+        searchReservation
     }
 });

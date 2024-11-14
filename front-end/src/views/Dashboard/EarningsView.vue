@@ -70,7 +70,7 @@ const handleOpenCards = () => {
                     <td class="px-4 py-3">{{ service.pc }}</td>
                     <td class="px-4 py-3 text-right text-green-400 font-semibold">{{
                         formatCurrency(service.total_amount)
-                    }}</td>
+                        }}</td>
                     <td class="px-4 py-3 text-right">{{ service.total_hours }} Hrs</td>
                     <td class="px-4 py-3">De {{ service.start }} Hasta {{ service.end }}</td>
                 </tr>
@@ -81,5 +81,5 @@ const handleOpenCards = () => {
             tu conexión</p>
     </main>
     <EarningsModal :stat="services.stats" :visible="visible" @update:visible="visible = false"
-        :totalConfirmed="services.totalConfirmed" />
+        :totalConfirmed="services.totalConfirmed" :totalAmountConfirmedCount="services.totalAmountConfirmedCount" />
 </template>

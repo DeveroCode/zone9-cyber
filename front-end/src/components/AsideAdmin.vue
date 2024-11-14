@@ -32,7 +32,7 @@ const logout = async () => {
             <AsideLinks to="earnings" :icon="ArrowTrendingUpIcon">Ganancias</AsideLinks>
         </nav>
 
-        <button class="text-md font-semibold text-secondary dark:text-white border border-gray-200 dark:border-primary-dash dark:bg-secondary-dark rounded-md py-2 px-7 shadow-md flex 
+        <button class="text-md font-semibold text-secondary dark:text-white border border-gray-200 dark:border-primary-dash dark:bg-secondary-dark rounded-md py-2 md:px-2 2xl:px-7 shadow-md flex 
             items-center justify-between gap-3" @click="logout">
             Cerrar Sesión
             <ArrowRightEndOnRectangleIcon class="w-5 h-5 mt-[2px]" />

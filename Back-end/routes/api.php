@@ -12,11 +12,14 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/reservations', [ReservationController::class, 'index']);
-    Route::get('/stats', [ReservationController::class, 'show']);
-    Route::post('/update-reservation/{id}', [ReservationController::class, 'update']);
-    Route::delete('/delete-reservation/{id}', [ReservationController::class, 'destroy']);
-    Route::post('/reservation-loan-update/{id}', [ReservationController::class, 'loanUpdate']);
+    
+    Route::controller(ReservationController::class)->group(function () {
+        Route::get('/reservations', 'index');
+        Route::post('/update-reservation/{id}', 'update');
+        Route::delete('/delete-reservation/{id}', 'destroy');
+        Route::get('/search-reservation/{word}', 'search');
+        Route::get('/stats', 'show');
+    });
 
     // Route::get('/user', [UserController::class, 'show']);
     Route::controller(UserController::class)->group(function () {
