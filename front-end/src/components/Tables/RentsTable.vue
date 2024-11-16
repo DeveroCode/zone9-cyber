@@ -47,7 +47,7 @@ const props = defineProps({
                 <td class="px-4 py-3">{{ service.pc }}</td>
                 <td class="px-4 py-3 text-right text-green-400 font-semibold">{{
                     formatCurrency(service.total_amount)
-                    }}</td>
+                }}</td>
                 <td class="px-4 py-3 text-right">{{ service.total_hours }} Hrs</td>
                 <td class="px-4 py-3">De {{ service.start }} Hasta {{ service.end }}</td>
                 <td class="px-4 py-3 text-center">

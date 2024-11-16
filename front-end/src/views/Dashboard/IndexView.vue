@@ -8,6 +8,7 @@ import FormCreateAccount from '@/components/Forms/FormCreateAccount.vue';
 import FormAddExpense from '@/components/Forms/FormAddExpense.vue';
 import FormAddGain from '@/components/Forms/FormAddGain.vue';
 import CardComponent from '@/components/Cards/CardComponent.vue';
+import StatsCharts from '@/components/StatsCharts.vue';
 
 const services = usePcServices();
 
@@ -40,6 +41,7 @@ onMounted(async () => {
 
     <!-- Navigation - creation of accounts, add expense and earnings -->
     <section class="mt-10">
+        <StatsCharts />
         <nav class="text-primary-dash dark:text-white space-x-5 py-10">
             <LinkDashboard @click="changeForm('cuentas')" :activeForm="'cuentas'" :currentForm="state.activeForm">
                 Cuentas</LinkDashboard>

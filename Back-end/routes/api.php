@@ -16,6 +16,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(ReservationController::class)->group(function () {
         Route::get('/reservations', 'index');
         Route::post('/update-reservation/{id}', 'update');
+        Route::post('/reservation-loan-update/{id}', 'loanUpdate');
         Route::delete('/delete-reservation/{id}', 'destroy');
         Route::get('/search-reservation/{word}', 'search');
         Route::get('/stats', 'show');
@@ -34,5 +35,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::controller(ReservationController::class)->group(function () {
     Route::post('/create-reservation', 'store');
+    Route::get('/stats', 'show');
 });
 Route::post('/auth/user', [AuthController::class, 'login']);
