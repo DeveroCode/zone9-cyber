@@ -12,6 +12,11 @@ const card = ref(false);
 const table = ref(false);
 
 onMounted(async () => {
+    services.isLoading = true;
+    setTimeout(() => {
+        services.isLoading = false;
+    }, 600);
+    await services.getReservationsFn();
     await services.getStats();
 });
 
@@ -73,7 +78,7 @@ const handleTable = () => {
                     <td class="px-4 py-3">{{ service.pc }}</td>
                     <td class="px-4 py-3 text-right text-green-400 font-semibold">{{
                         formatCurrency(service.total_amount)
-                        }}</td>
+                    }}</td>
                     <td class="px-4 py-3 text-right">{{ service.total_hours }} Hrs</td>
                     <td class="px-4 py-3">De {{ service.start }} Hasta {{ service.end }}</td>
                 </tr>

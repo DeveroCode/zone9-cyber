@@ -12,6 +12,11 @@ const cards = ref(false);
 const table = ref(false);
 
 onMounted(async () => {
+    services.isLoading = true;
+    setTimeout(() => {
+        services.isLoading = false;
+    }, 600);
+    await services.getReservationsFn();
     await services.getStats();
 });
 
@@ -46,7 +51,8 @@ const handleOpenCards = () => {
         </button>
     </div>
     <section class="mt-2 flex gap-5 justify-between cursor-pointer" :class="cards ? '' : 'hidden'">
-        <CardEarnings :stats="services.stats" :totalAmountConfirmed="services.totalAmountConfirmed" />
+        <CardEarnings :stats="services.stats" :totalAmountConfirmed="services.totalAmountConfirmed"
+            :totalAmountConfirmedCount="services.totalAmountConfirmedCount" />
     </section>
 
     <main class="mt-10" :class="table ? 'hidden' : ''">

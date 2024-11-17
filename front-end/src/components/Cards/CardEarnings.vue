@@ -11,16 +11,15 @@ const props = defineProps({
     totalAmountConfirmed: {
         type: Number,
         require: true
+    },
+    totalAmountConfirmedCount: {
+        type: Number,
+        require: true
     }
 });
 
-const cuantity = computed(() => {
-    return props.stats.length > 4 ? props.stats[4].cuantity.value : 0;
-});
-
-
 const perHours = computed(() => {
-    return (cuantity.value / props.totalAmountConfirmed);
+    return (props.totalAmountConfirmedCount / props.totalAmountConfirmed);
 });
 </script>
 
@@ -32,11 +31,11 @@ const perHours = computed(() => {
             <CurrencyDollarIcon class="w-7 h-7 text-primary" />
         </div>
         <p class="font-bold mt-2 text-3xl block">
-            {{ stats.length > 4 ? formatCurrency(stats[4].cuantity.value) : 'N/A' }}
+            {{ formatCurrency(totalAmountConfirmedCount) }}
         </p>
-        <p class="text-xs text-gray-400 mt-3">La ganancia real representa el <span>{{ stats.length > 4 ?
-            stats[4].cuantity.percentage + '%' : 'N/A'
-                }}</span> de la ganancia total esperada.</p>
+        <p class="text-xs text-gray-400 mt-3">Ganancias sera reales estimadas para el mes, segun reservas sin confirmar
+            y
+            confirmadas</p>
     </div>
     <div
         class="w-[400px] bg-white dark:bg-primary-dash dark:border-primary-dash dark:text-white text-primary-dash  shadow-md border py-5 rounded-md px-10">
