@@ -8,6 +8,9 @@ use App\Http\Resources\StatsCollection;
 use App\Http\Requests\ReservationRequest;
 use App\Http\Resources\ReservationsCollection;
 use App\Http\Requests\UpdateReservationRequest;
+use App\Http\Resources\ComputerCollection;
+use App\Http\Resources\ComputerResource;
+use App\Models\Computer;
 
 class ReservationController extends Controller
 {
@@ -16,6 +19,11 @@ class ReservationController extends Controller
     {
         $reservations = Reservation::orderBy('created_at', 'desc')->paginate(6);
         return new ReservationsCollection($reservations);
+    }
+
+    public function getComputers(){
+        $computers = Computer::all();
+        return new  ComputerCollection($computers);
     }
 
     public function update(UpdateReservationRequest $request , $id)
@@ -39,7 +47,7 @@ class ReservationController extends Controller
             'name' => $data['name'],
             'last_name' => $data['last_name'],
             'folio' => $data['folio'],
-            'pc' => $data['pc'],
+            'computer_id' => $data['computer_id'],
             'phone' => $data['phone'],
             'start' => $data['start'],
             'end' => $data['end'],

@@ -7,6 +7,8 @@ export const usePcServices = defineStore("PcServices", () => {
     // Utilities
     const MAX_PRICE = 17;
     const toast = inject("toast");
+    const computers = ref([]);
+    const selectPc = ref('');
 
     // Variable to create, edit a reservations
     const hour = ref(0);
@@ -26,6 +28,31 @@ export const usePcServices = defineStore("PcServices", () => {
         per_page: null,
         total: null
     });
+
+
+    onMounted(async () => {
+        try {
+            await getReservationsFn();
+            await computersFn();
+        } catch (error) {
+            console.log(error);
+        } finally {
+            await getStats();
+            isLoading.value = false;
+        }
+    });
+
+    async function computersFn() {
+        const { data } = await APIReservations.getComputers();
+        computers.value = data.data
+    }
+
+    function selectedPc(id) {
+        const selectedComputer = computers.value.find(computer => computer.id === id);
+        if (selectedComputer) {
+            selectPc.value = selectedComputer;
+        }
+    }
 
     // Functions to create a new Reservation
     function onCreateReservation(reservation, id = null) {
@@ -89,17 +116,6 @@ export const usePcServices = defineStore("PcServices", () => {
             return { success: false, message: error.response.data.message };
         }
     }
-
-    onMounted(async () => {
-        try {
-            await getReservationsFn();
-        } catch (error) {
-            console.log(error);
-        } finally {
-            await getStats();
-            isLoading.value = false;
-        }
-    })
 
     async function getReservationsFn(pageUrl = null) {
         try {
@@ -188,6 +204,10 @@ export const usePcServices = defineStore("PcServices", () => {
     }
 
     return {
+        computers,
+        computersFn,
+        selectPc,
+        selectedPc,
         onCreateReservation,
         changePage,
         pagination,

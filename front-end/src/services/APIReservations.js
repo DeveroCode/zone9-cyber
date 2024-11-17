@@ -4,6 +4,9 @@ export default {
     getReservations(pageUrl = null) {
         return authorization('get', pageUrl || '/reservations');
     },
+    getComputers() {
+        return authorization('get', '/computers');
+    },
     create(reservation) {
         return authorization('post', '/create-reservation', reservation);
     },

@@ -13,7 +13,7 @@ class Reservation extends Model
         'name',
         'last_name',
         'folio',
-        'pc',
+        'computer_id',
         'phone',
         'start',
         'end',

@@ -1,7 +1,6 @@
 <script setup>
-import { ref, inject, nextTick } from 'vue';
+import { ref, inject, onMounted, computed } from 'vue';
 import { generateFolio, toggleModal } from '@/helpers';
-import { computers } from '@/data/computer';
 import { usePcServices } from '@/stores/PcServices';
 import Dialog from '@/components/Modals/ReservationModal.vue';
 
@@ -11,6 +10,8 @@ const visible = ref(false);
 const toast = inject('toast');
 const folio = ref('');
 const user = ref({});
+const computer_id = ref(1);
+
 const handleViewModal = () => {
     toggleModal(visible);
 }
@@ -18,10 +19,11 @@ const handleViewModal = () => {
 
 const handleSubmit = async ({ ...formData }) => {
     user.value = formData;
-    folio.value = generateFolio(formData.name, formData.last_name, formData.pc);
+    folio.value = generateFolio(formData.name, formData.last_name, formData.phone);
+    services.selectedPc(formData.computer_id);
     services.onCreateReservation({ ...formData });
-    await nextTick();
     const response = await services.reservation({ ...formData, folio: folio.value, total_hours: services.totalHours, total_amount: services.totalAmount });
+
     handleViewModal();
     if (response.success) {
         toast.success(response.response.message, { duration: 2000 });
@@ -38,8 +40,10 @@ const handleSubmit = async ({ ...formData }) => {
             <FormKit type="text" name="name" placeholder="Incluya un Nombre" label="Nombre" />
             <FormKit type="text" name="last_name" placeholder="Incluya un apellido" label="Apellido" />
         </fieldset>
-        <FormKit type="select" name="pc" :options="computers.map(pc => pc.name)" label="Computadora"
+        <FormKit type="select" name="computer_id" v-model="computer_id"
+            :options="services.computers.map(pc => ({ label: pc.name, value: pc.id }))" label="Computadora"
             input-class="text-secondary" />
+
         <FormKit type="tel" name="phone" placeholder="Teléfono" label="Ingresa un número de teléfono" />
 
         <fieldset class="flex justify-between gap-3">
@@ -61,5 +65,5 @@ const handleSubmit = async ({ ...formData }) => {
     </FormKit>
 
     <Dialog :visible="visible" :handleViewModal="handleViewModal" :name="user.name" :last_name="user.last_name"
-        :hours="services.totalHours" :pc="user.pc" :folio="folio" :total_pay="services.totalAmount" />
+        :hours="services.totalHours" :pc="services.selectPc.name" :folio="folio" :total_pay="services.totalAmount" />
 </template>
