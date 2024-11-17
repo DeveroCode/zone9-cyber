@@ -15,4 +15,8 @@ class Computer extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+
+    public function reservations(){
+        return $this->belongsToMany(Reservation::class);
+    }
 }

@@ -79,7 +79,7 @@ const handleViewModal = (id) => {
                     <FormKit type="form" :actions="false" @submit="updatePassword" :id="`update-password-${user.id}`">
                         <fieldset class="flex items-center justify-between">
                             <FormKit type="password" name="password" placeholder="Password"
-                                input-class="dark:border-secondary-dark dark:placeholder-gray-400 dark:bg-gray-600 w-64 focus:outline-none focus:ring-0 focus:border-gray-300" />
+                                input-class="dark:border-secondary-dark dark:placeholder-gray-400 dark:bg-gray-600 w-64 focus:outline-none focus:ring-0 focus:border-gray-300 md:w-48 2xl:w-64" />
                             <FormKit type="hidden" name="id" v-model="user.id" />
                             <button class="py-2 px-3 text-white bg-secondary dark:bg-gray-600 rounded-md">
                                 <CheckIcon class="w-5 h-5 mt-1" type="submit" />

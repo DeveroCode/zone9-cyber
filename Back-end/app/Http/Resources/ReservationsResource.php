@@ -20,7 +20,7 @@ class ReservationsResource extends JsonResource
             'last_name' => $this->last_name,
             'total_hours' => $this->total_hours,
             'folio' => $this->folio,
-            'pc' => $this->pc,
+            'pc' => $this->computers ? $this->computers->name : null,
             'start' => $this->start,
             'end' => $this->end,
             'total_amount' => $this->total_amount,

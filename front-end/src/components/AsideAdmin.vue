@@ -2,6 +2,7 @@
 import { inject } from 'vue';
 import { HomeIcon, UserPlusIcon, ArrowTrendingUpIcon, ArrowTrendingDownIcon, TicketIcon, ArrowRightEndOnRectangleIcon } from '@heroicons/vue/24/outline'
 import AsideLinks from './Links and Buttons/AsideLinks.vue';
+import Link from './Links and Buttons/Link.vue';
 import { authMethods } from '@/stores/AuthMethods';
 
 const methods = authMethods();
@@ -18,11 +19,12 @@ const logout = async () => {
 };
 </script>
 
-
 <template>
     <aside
         class="bg-white border-r-[1px] dark:border-primary-dash min-h-screen w-1/5 shadow-lg p-10 dark:bg-primary-dash">
-        <h2 class="text-2xl font-semibold text-secondary dark:text-white overflow-hidden">Administración</h2>
+        <Link to="home">
+        <p class="2xl:text-3xl md:text-2xl text-secondary dark:text-white text-center">Administración</p>
+        </Link>
 
         <nav class="text-secondary dark:text-white mt-10 space-y-5 text-lg font-semi-bold h-[86%]">
             <AsideLinks to="dashboard" :icon="HomeIcon">Resumen</AsideLinks>

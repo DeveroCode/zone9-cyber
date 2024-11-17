@@ -7,13 +7,15 @@
         <FormKit type="form" :actions="false">
             <div class="flex gap-3 items-center">
                 <!-- Campo de Nombre -->
-                <FormKit type="text" label="Nombre" label-class="dark:text-white w-[350px]" placeholder="Carlos" />
+                <FormKit type="text" label="Nombre" label-class="dark:text-white 2xl:w-[350px] md:w-[300px]"
+                    placeholder="Carlos" />
 
                 <!-- Campo de Apellido -->
-                <FormKit type="text" label="Apellido" label-class="dark:text-white w-[350px]" placeholder="Perez" />
+                <FormKit type="text" label="Apellido" label-class="dark:text-white 2xl:w-[350px] md:w-[300px]"
+                    placeholder="Perez" />
 
                 <!-- Campo de Email -->
-                <FormKit type="email" label="Email" label-class="dark:text-white w-[350px]"
+                <FormKit type="email" label="Email" label-class="dark:text-white 2xl:w-[350px] md:w-[300px]"
                     placeholder="test@test.com" />
             </div>
 

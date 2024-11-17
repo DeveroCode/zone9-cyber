@@ -21,4 +21,9 @@ class Reservation extends Model
         'total_amount',
         'loan'
     ];
+
+    public function computers()
+    {
+        return $this->belongsTo(Computer::class, 'computer_id');
+    }
 }

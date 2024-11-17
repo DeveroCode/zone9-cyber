@@ -32,11 +32,11 @@ const props = defineProps({
             <tr>
                 <th class="px-4 py-3 text-left">Fecha</th>
                 <th class="px-4 py-3 text-left">Nombre</th>
-                <th class="px-4 py-3 text-left w-1/12">Computadora</th>
+                <th class="px-4 py-3 text-left 2xl:w-1/12 md:w-[100px]">Computadora</th>
                 <th class="px-4 py-3 text-right">Precio</th>
                 <th class="px-4 py-3 text-right">Tiempo</th>
                 <th class="px-4 py-3 text-left">Servicio</th>
-                <th class="px-4 py-3 text-center">Acciones</th>
+                <th class="px-4 py-3 text-center md:w-[200px]">Acciones</th>
             </tr>
         </thead>
         <tbody class="dark:bg-gray-800 dark:text-gray-100 text-secondary">

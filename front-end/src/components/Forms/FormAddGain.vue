@@ -7,15 +7,15 @@
         <FormKit type="form" :actions="false">
             <div class="flex gap-3 items-center">
                 <!-- Campo de Nombre -->
-                <FormKit type="text" label="Fuente" label-class="dark:text-white w-[350px]"
+                <FormKit type="text" label="Fuente" label-class="dark:text-white 2xl:w-[350px] md:w-[300px]"
                     placeholder="Fuente de ganancia" />
 
                 <!-- Campo de Apellido -->
-                <FormKit type="number" min="10" label="Monto" label-class="dark:text-white w-[350px]"
+                <FormKit type="number" min="10" label="Monto" label-class="dark:text-white 2xl:w-[350px] md:w-[300px]"
                     placeholder="$0.00" />
 
                 <!-- Campo de Email -->
-                <FormKit type="date" label="Fecha" label-class="dark:text-white w-[350px]" />
+                <FormKit type="date" label="Fecha" label-class="dark:text-white 2xl:w-[350px] md:w-[300px]" />
             </div>
 
             <!-- Botón Agregar Cuenta -->
