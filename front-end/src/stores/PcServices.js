@@ -30,17 +30,17 @@ export const usePcServices = defineStore("PcServices", () => {
     });
 
 
-    onMounted(async () => {
-        try {
-            await getReservationsFn();
-            await computersFn();
-        } catch (error) {
-            console.log(error);
-        } finally {
-            await getStats();
-            isLoading.value = false;
-        }
-    });
+    // onMounted(async () => {
+    //     try {
+    //         await getReservationsFn();
+    //         await computersFn();
+    //     } catch (error) {
+    //         console.log(error);
+    //     } finally {
+    //         await getStats();
+    //         isLoading.value = false;
+    //     }
+    // });
 
     async function computersFn() {
         const { data } = await APIReservations.getComputers();
@@ -215,6 +215,7 @@ export const usePcServices = defineStore("PcServices", () => {
         totalAmount,
         rent,
         hour,
+        getReservationsFn,
         reservation, // => Crear la reservacion
         getStats,
         stats,

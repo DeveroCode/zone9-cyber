@@ -2,9 +2,9 @@
 import { ArrowTrendingUpIcon, ArrowTrendingDownIcon } from '@heroicons/vue/24/outline'
 import { formatCurrency } from '@/helpers';
 
-const percentageTitle = ''; // Aquí declaramos la variable y la inicializamos vacía
+const percentageTitle = '';
 
-defineProps({
+const props = defineProps({
     icon: {
         type: Object,
         required: true
@@ -24,7 +24,7 @@ defineProps({
 });
 
 const formatStats = cuantity => {
-    if (typeof cuantity === 'string') {
+    if (props.title === 'Ganancias Mensuales' || props.title === 'Ganancias Diarias' || props.title === 'Ganancias Netas') {
         return formatCurrency(cuantity);
     } else {
         return '+' + cuantity;

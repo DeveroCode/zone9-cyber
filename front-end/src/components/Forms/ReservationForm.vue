@@ -12,10 +12,13 @@ const folio = ref('');
 const user = ref({});
 const computer_id = ref(1);
 
+onMounted(async () => {
+    await services.computersFn();
+});
+
 const handleViewModal = () => {
     toggleModal(visible);
 }
-
 
 const handleSubmit = async ({ ...formData }) => {
     user.value = formData;

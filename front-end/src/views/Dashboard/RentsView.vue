@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject, watch } from 'vue';
+import { ref, inject, watch, onMounted } from 'vue';
 import { usePcServices } from '@/stores/PcServices';
 import { formatCurrency } from '@/helpers';
 import { ChevronLeftIcon, ChevronRightIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
@@ -13,6 +13,14 @@ const edit = ref(false);
 const remove = ref(false);
 const identifier = ref(0);
 const word = ref('');
+
+onMounted(async () => {
+    try {
+        await reservations.getReservationsFn();
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 watch(word, async (newWord) => {
     if (newWord === '') {
