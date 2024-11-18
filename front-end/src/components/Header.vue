@@ -9,9 +9,24 @@ import logo from '/img/logo-sin-texto.svg'
 const isOpen = ref(false);
 const router = useRouter();
 const scroll = ref(0);
+const isLogin = ref(false);
+
 const hancliClickMenu = () => {
     isOpen.value = !isOpen.value
 };
+
+onMounted(() => {
+    logged();
+});
+
+function logged() {
+    const token = localStorage.getItem('token');
+    if (token) {
+        isLogin.value = true;
+    } else {
+        isLogin.value = false;
+    }
+}
 
 const handleScrollAnimation = () => {
     if (router.currentRoute.value.name === 'reservation') {
@@ -52,7 +67,8 @@ onBeforeUnmount(() => {
         <!-- Botones a la derecha en pantallas medianas y grandes -->
         <div class="hidden md:flex ml-auto space-x-3 md:space-x-5">
             <SecondButton type="secondary text-white" direction="reservation">Reservar</SecondButton>
-            <SecondButton type="primary text-secondary" direction="login">Iniciar</SecondButton>
+            <SecondButton type="primary text-secondary" direction="dashboard" v-if="isLogin">Dashboard</SecondButton>
+            <SecondButton type="primary text-secondary" direction="login" v-else>Iniciar</SecondButton>
         </div>
 
         <!-- Navegación para móviles -->

@@ -17,6 +17,10 @@ export const authMethods = defineStore('authMethods', () => {
         }
     });
 
+    const isAdmin = () => {
+        return user.value.type_user === 'admin';
+    }
+
     async function login(login) {
         try {
             const { data } = await APIAuth.login(login);
@@ -49,6 +53,7 @@ export const authMethods = defineStore('authMethods', () => {
 
     return {
         user,
+        isAdmin,
         login,
         logout
     }

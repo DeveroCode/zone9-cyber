@@ -26,4 +26,5 @@ class Reservation extends Model
     {
         return $this->belongsTo(Computer::class, 'computer_id');
     }
+    
 }

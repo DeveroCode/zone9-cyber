@@ -29,22 +29,13 @@ export const usePcServices = defineStore("PcServices", () => {
         total: null
     });
 
-
-    // onMounted(async () => {
-    //     try {
-    //         await getReservationsFn();
-    //         await computersFn();
-    //     } catch (error) {
-    //         console.log(error);
-    //     } finally {
-    //         await getStats();
-    //         isLoading.value = false;
-    //     }
-    // });
-
-    async function computersFn() {
-        const { data } = await APIReservations.getComputers();
-        computers.value = data.data
+    async function aviableComputers($start, $end) {
+        try {
+            const { data } = await APIReservations.getComputersAvailable($start, $end);
+            computers.value = data.data
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     function selectedPc(id) {
@@ -204,8 +195,8 @@ export const usePcServices = defineStore("PcServices", () => {
     }
 
     return {
+        aviableComputers,
         computers,
-        computersFn,
         selectPc,
         selectedPc,
         onCreateReservation,

@@ -29,7 +29,7 @@ const logout = async () => {
         <nav class="text-secondary dark:text-white mt-10 space-y-5 text-lg font-semi-bold h-[86%]">
             <AsideLinks to="dashboard" :icon="HomeIcon">Resumen</AsideLinks>
             <AsideLinks to="reservations" :icon="TicketIcon">Reservas</AsideLinks>
-            <AsideLinks to="users" :icon="UserPlusIcon">Cuentas</AsideLinks>
+            <AsideLinks to="users" :icon="UserPlusIcon" v-if="methods.isAdmin()">Cuentas</AsideLinks>
             <AsideLinks to="expenses" :icon="ArrowTrendingDownIcon">Gastos</AsideLinks>
             <AsideLinks to="earnings" :icon="ArrowTrendingUpIcon">Ganancias</AsideLinks>
         </nav>

@@ -10,13 +10,9 @@ class Computer extends Model
     use HasFactory;
 
     protected $fillable = ['id', 'name'];
-
-
-    public function users(){
-        return $this->belongsToMany(User::class);
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
-
-    public function reservations(){
-        return $this->belongsToMany(Reservation::class);
-    }
+    
 }

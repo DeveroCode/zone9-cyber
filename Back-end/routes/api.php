@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::controller(ReservationController::class)->group(function () {
-    Route::get('/computers', 'getComputers');
+    Route::get('/available-computers/{start}/{end}', 'getComputersAvailable');
     Route::post('/create-reservation', 'store');
     Route::get('/stats', 'show');
 });
