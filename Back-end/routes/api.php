@@ -36,6 +36,6 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::controller(ReservationController::class)->group(function () {
     Route::get('/available-computers/{start}/{end}', 'getComputersAvailable');
     Route::post('/create-reservation', 'store');
-    Route::get('/stats', 'show');
+    Route::get('/computers', 'computers');
 });
 Route::post('/auth/user', [AuthController::class, 'login']);

@@ -22,6 +22,11 @@ class ReservationController extends Controller
         return new ReservationsCollection($reservations);
     }
 
+    public function computers(){
+        $computers = Computer::all();
+        return new ComputerCollection($computers);
+    }
+
     public function getComputersAvailable($start, $end){
         $start = Carbon::createFromFormat('H:i', $start)->format('H:i:s');
         $end = Carbon::createFromFormat('H:i', $end)->format('H:i:s');
