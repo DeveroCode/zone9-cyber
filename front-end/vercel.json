@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "front-end/package.json",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "front-end/dist"
+            }
+        }
+    ],
+    "env": {
+        "VITE_APP_URL": "https://your-backend-url.com"
+    }
+}
