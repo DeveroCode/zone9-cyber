@@ -33,10 +33,10 @@ const servicios = [
             </p>
 
             <!-- Botón CTA -->
-            <button
+            <RouterLink :to="{ name: 'reservation' }"
                 class="text-secondary py-2 px-6 md:px-8 xl:px-10 2xl:px-12 rounded-full bg-primary mt-6 md:mt-8 xl:mt-10 font-bold text-base md:text-lg xl:text-xl 2xl:text-2xl hover:bg-white hover:text-secondary transition-all duration-300">
                 Reserva
-            </button>
+            </RouterLink>
         </div>
     </section>
 

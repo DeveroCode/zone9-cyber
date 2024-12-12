@@ -1,35 +1,39 @@
-import { WifiIcon, ComputerDesktopIcon, PrinterIcon, DocumentDuplicateIcon, ReceiptPercentIcon, CpuChipIcon } from '@heroicons/vue/24/outline';
+import Internet from '/img/internet.jpg'
+import Pc from '/img/pc.jpg'
+import Copias from '/img/copias.jpg'
+import Engargolado from '/img/engargolado.webp'
+import Reparacion from '/img/reparacion.jpg'
 
 export const services = [
     {
         id: 1,
         name: 'Servicio de internet',
-        icon: WifiIcon
+        icon: Internet
     },
     {
         id: 2,
         name: 'Venta de computadoras',
-        icon: ComputerDesktopIcon
+        icon: Pc
     },
     {
         id: 3,
         name: 'Copias',
-        icon: DocumentDuplicateIcon
+        icon: Copias
     },
     {
         id: 4,
         name: 'Impresiones a blanco y color',
-        icon: PrinterIcon
+        icon: Copias
     },
     {
         id: 5,
         name: 'Engargolado',
-        icon: ReceiptPercentIcon
+        icon: Engargolado
     },
     {
         id: 6,
         name: 'Rep. de Computadoras',
-        icon: CpuChipIcon
+        icon: Reparacion
     },
 ];
 

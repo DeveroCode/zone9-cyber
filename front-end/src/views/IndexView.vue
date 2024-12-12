@@ -30,7 +30,7 @@ onMounted(() => {
             <p class="mt-4 mb-10 text-base md:text-lg lg:text-xl animate-fadeInUp">
                 Tu espacio de trabajo en el centro de la ciudad. Conéctate, trabaja y disfruta de un excelente servicio.
             </p>
-            <Button>Reserva</Button>
+            <Button :to="{ name: 'reservation' }">Reserva</Button>
         </div>
 
         <div class="parallax lg:w-[60%] xl:w-[55%] 2xl:w-[45%]">
@@ -89,7 +89,7 @@ onMounted(() => {
     </section>
 
     <!-- Sección de contacto -->
-    <div class="mx-auto p-6 md:p-16 lg:p-24 flex flex-col md:flex-row justify-between items-center">
+    <div class="mx-auto p-6 md:p-16 lg:p-24 flex flex-col md:flex-row justify-between items-center" id="contact">
         <div class="md:w-2/3">
             <h4 class="font-bold text-2xl md:text-4xl lg:text-5xl text-secondary">Contáctanos</h4>
             <p class="text-secondary md:text-xl mt-4 lg:mt-8 md:pr-8 lg:pr-0">Email, llamada o completa el formulario

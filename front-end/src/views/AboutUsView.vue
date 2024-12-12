@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import Zone from '/img/zone.svg'
+import Background from '/img/background_face.jpg'
 import Profile from '/img/profile-example.png'
 import Waves from '@/components/parallax/Waves.vue'
 import Parallax from 'parallax-js'
@@ -40,7 +41,7 @@ onMounted(() => {
     </main>
 
 
-    <section class="min-h-screen flex flex-col items-center justify-center main-section">
+    <section class="min-h-screen flex flex-col items-center justify-center main-section md:py-12">
         <h2 class="text-2xl md:text-4xl font-semibold text-secondary">Conoce a nuestro equipo</h2>
 
 
@@ -58,7 +59,16 @@ onMounted(() => {
             </div>
         </div>
 
-        <h3 class="text-3xl md:text-5xl font-semibold text-secondary text-center py-16">Ofreciendo soluciones desde 2018
-        </h3>
+        <div>
+            <h3 class="text-3xl md:text-5xl font-semibold text-secondary text-center py-16">Ofreciendo soluciones desde
+                2018
+            </h3>
+
+            <div class="bg-white rounded-md shadow-xl p-12 my-24 w-1/2 h-1/2 mx-auto">
+                <legend class="text-2xl font-semibold text-gray-800 uppercase text-center py-2">Conoce nuestra tienda
+                </legend>
+                <img :src="Background" alt="Imgen de referencia de la tienda en vista frontal">
+            </div>
+        </div>
     </section>
 </template>

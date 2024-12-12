@@ -9,6 +9,9 @@ const getYear = () => new Date().getFullYear()
         </span>
 
         <nav class="text-sm text-white space-x-5 mt-4 md:mt-0">
+            <a href="https://www.facebook.com/profile.php?id=100054385997055&sk" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
             <a href="#">Términos de Servicio</a>
             <a href="#">Política de Privacidad</a>
         </nav>
